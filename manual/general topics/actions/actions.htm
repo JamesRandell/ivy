@@ -1,0 +1,21 @@
+<p>These blocks of code make up your application. An action is just another name 
+a method in a class that is one of your controllers. Throughout this document the 
+term 'Action' is used - remember that these are just class methods!</p>
+
+<h2>URI Routing</h2>
+<p>An action is called by a parameter set in the URI. When "$_GET['action']" is 
+sent the action is invoked and your code is run.</p>
+
+<h2>Non-existing actions</h2>
+<p>If a call to a non-existing action is made the controller will route the request 
+to the index action (which is present in every controller).</p>
+
+<h2>Creating secure actions</h2>
+<p>Sometimes you will create an action that can only be used by another, and it 
+shouldn't be requested anywhere else.</p>
+
+<p>You can take advantage of PHP5's visibility keywords to declare a the action 
+Private or Protected. Doin'g so will force the controller to route to the index 
+action should a request to a private action be made.</p>
+
+

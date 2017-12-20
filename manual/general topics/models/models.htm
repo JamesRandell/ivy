@@ -1,0 +1,18 @@
+<p>Ivy treats models as <strong>Data Dictionary</strong> files. They contain meta data 
+about external data structures, validation, triggers and anything else that relates 
+to a datasource. They are sometimes referred to in Ivy as <strong>Schemas</strong></p>
+
+<h2>What makes up a Model</h2>
+<p>A model contains information relating to data stored in a database of some 
+kind. This could be SQL, XML, Excel - it doesn't matter.</p>
+<p>Each model will always contain the following:</p>
+<ul>
+	<li><strong>fieldSpec</strong> handles fields and validation</li>
+	<li><strong>tableSpec</strong> selects a specific table</li>
+	<li><strong>databaseSpec</strong> custom connection to databases or file 
+		systems</li>
+</ul>
+
+<h2>Other uses</h2>
+<p>Form validation rules are held in the <strong>fieldSpec</strong> part of a file. 
+These contain rules challenge user input.</p>

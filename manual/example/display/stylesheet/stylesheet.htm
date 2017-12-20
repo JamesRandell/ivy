@@ -1,0 +1,16 @@
+<p>Stylesheets represent the templates that are usually found in either the 
+site folder or i nthe shared theme directory.</p>
+
+<p>When the template engine looks for a stylesheet to use it looks at in these 
+places (first to last):
+<ul>
+	<li>extension/&lt;extension name&gt;/resource/template/</li>
+	<li>site/&lt;site name&gt;/resource/template/</li>
+	<li><span class="note small">(*)</span> shared/&lt;theme name&gt;/template/</li>
+</ul>
+</p>
+
+<p class="note small">(*) The themes in the shared folder are only concerned with 
+template resources, so miss out the 'resource' folder and go directly to the 
+templates.
+</p>

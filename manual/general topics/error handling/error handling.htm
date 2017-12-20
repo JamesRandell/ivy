@@ -1,0 +1,36 @@
+<p>Ivy comes with an error reporting module as part of it's core. Each site 
+that is registered with the framework has every error stored in the 
+database</p>
+
+<h2>PHP coding errors</h2>
+<p>The error module takes a leaf out of Zend Platform and mimics the categories 
+of errors that errors get reported under. Any script error the falls in the 
+standard PHP bitmask is recorded.</p>
+
+<h2>Additional error types</h2>
+<p>Errors that are reported get broken down in to further categories to better 
+identify the generated report.</p>
+<ul>
+	<li>Slow Script Execution</li>
+	<li>Slow Function Execution</li>
+	<li>Slow Query Execution</li>
+	<li>Database Error</li>
+	<li>PHP Error</li>
+	<li>PHP Notice</li>
+	<li>Function Error</li>
+	<li>Excess Memory Usage</li>
+	<li>Load Average</li>
+	<li>Ignore</li>
+</ul>
+
+<h2>Triggering errors</h2>
+<p>To trigger an error in your application you should use the 
+<strong>trigger_error</strong> function and pass the error string to it.</p>
+
+<p>When this is invoked your error is recorded and can be viewed from the error 
+module.</p>
+
+<h2>Help</h2>
+<p>When viewing the error report you also have links to the originating files, script 
+location and line numbers and also related errors that are of the same type and 
+source.</p>

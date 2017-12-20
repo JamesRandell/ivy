@@ -1,0 +1,32 @@
+<p>Controllers handle the business logic, this includes:</p>
+<ul>
+	<li>handling user input</li>
+	<li>creating application components that drive the system</li>
+	<li>has the ability to override certain defaults (such as stylesheets)</li>
+</ul>
+
+<h2>What the Controller does</h2>
+<p>The controller(s) make up your application. They contain the instructions that 
+make your application run the way you want it to. A controller contains actions 
+that perform specific tasks such as updating a database or displaying a form. These 
+actions are grouped with other similar actions to make a controller.  You can have 
+multiple controllers per application.</p>
+
+<p>For example you may have a controller for a blog application dealing with page 
+views, creating posts and comments.  Another controller could be created to deal 
+with the administration aspects of the blog like creating users and moderating 
+content.</p>
+
+<h2>What goes in which controller?</h2>
+<p>There really is no hard rule that tells you that action X goes in controller Y, 
+you simply have to group your actions according to your own style. There are no 
+restrictions - you could if you wanted place all your actions in one huge 
+controller! They are there to offer another level of separation should you require 
+it.</p>
+
+<h2>Technical</h2>
+<p>What the application_Controller class also does is extend the 
+'Ivy_Controller' class, which essentially sets up a working environment for your 
+scripts to function. It deals with setting up templates and system variables. It 
+also contains a list of some useful functions that can be used in your 
+scripts.</p>

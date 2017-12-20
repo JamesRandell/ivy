@@ -1,0 +1,81 @@
+<p>The rules in <strong>back</strong> key of each field match methods defined in the 
+<strong>Ivy_Validation</strong> file. When input is received these rules are checked 
+for a valid entry.</p>
+
+<h2>Rules</h2>
+<p>Rules have a key followed by a value. Some values must be a specific word where as 
+others can be a generic string or integer.</p>
+
+<h2>Type</h2>
+<p>This matches the type attribute on most RDBMS and should be one of the following</p>
+<ul>
+	<li>var</li>
+	<li>int</li>
+	<li>clob</li>
+	<li>unix</li>
+</ul>
+<p><strong>Clob</strong> should only be used for free text type fields where 
+<strong>Unix</strong> tells the framework to parse a Unix time stamp.</p>
+
+<h2>Truncate</h2>
+<p>If the input is longer than the value, the data to the right of this character 
+limit will be discarded.</p>
+<p>Options are:</p>
+<ul>
+	<li>a numeric value</li>
+</ul>
+
+<h2>Size</h2>
+<p>This matches the maximum length of data that can be inserted to a database field. 
+If this value is exceeded then an error will be generated.</p>
+<p>Options are:</p>
+<ul>
+	<li>a numeric value</li>
+</ul>
+
+<h2>Minsize</h2>
+<p>if the input length is shorter than this value then an error will be generated.</p>
+<p>Options are:</p>
+<ul>
+	<li>a numeric value</li>
+</ul>
+
+<h2>Unique</h2>
+<p>A query can be used here to make sure that the input does not exist in the same 
+field/table.</p>
+
+<p><strong>View further information at the bottom for help on structuring this 
+value.</strong></p>
+
+<h2>Regex</h2>
+<p>The validation engine supports regex expressions to filter out undisried input.</p>
+
+<h2>Uppercase</h2>
+<p>Input will be transformed to upper case.</p>
+<p>Options are:</p>
+<ul>
+	<li>y</li>
+</ul>
+
+<h2>Required</h2>
+<p>An input is <strong>required</strong>, if no input is found then an error is 
+generated.</p>
+<p>Options are:</p>
+<ul>
+	<li>y</li>
+</ul>
+
+<h2>Default</h2>
+<p>I there is no input found then use a default value.</p>
+<p>Options are:</p>
+<ul>
+	<li><strong>Collar</strong> - unique user ID</li>
+	<li><strong>Date</strong> - current Unix time stamp</li>
+</ul>
+<p>If none of the above values are set then whatever else is found will be used as 
+the default value.</p>
+
+<h2>Rank</h2>
+<p>A numeric value can be set so that this field will only be visible to a user with a 
+rank higher than the one you set. This applies only to form fields, the data will be 
+visible on results.</p>

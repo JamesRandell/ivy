@@ -1,0 +1,50 @@
+<p>Two of the most important aspects of the frameworks file structure is 
+similarity and inheritance.</p>
+
+<h2>Similarity</h2>
+<p>When building a theme, site or extension the folder structure and the way you 
+develop remains unchanged. With the exception of themes (they are only concerned 
+with the display) everything else follows the same structure.</p>
+
+<ul>
+	<li>Controller</li>
+	<li>Model</li>
+	<li>Resource</li>
+	<li>System</li>
+	<li>and View</li>
+</ul>
+
+<h2>Controller</h2>
+<p>The current controller that the user has access to, and an 
+'application_Controller' that resides above the current controller. This acts 
+as a hierarchy so that you have Ivy_Controller &gt; application_Controller &gt; 
+&lt;your controller&gt;.</p>
+
+<p>The significance of this is that you can place commen or shared methods in 
+your sites application_Controller and extend it with your individual 
+controllers.</p>
+
+
+<h2>Model</h2>
+<p>The term 'Model' is linked loseley to an atypical MVC structured application.</p>
+<p>A model contains information relating to data stored in a database of some 
+kind. This could be SQL, XML, Excel - it doesn't matter.</p>
+<p>Each model will always contain the following:</p>
+<ul>
+	<li><strong>fieldSpec</strong> handles fields and validation</li>
+	<li><strong>tableSpec</strong> selects a specific table</li>
+	<li><strong>databaseSpec</strong> custom connection to databases or file 
+		systems</li>
+</ul>
+
+<h2>Resource</h2>
+<p>Style, Scripts, Images and the cache are all located in a resource or theme 
+folder.</p>
+
+<h2>System</h2>
+<p>These contain special files that usually contains array keys or custom 
+override files.</p>
+
+<h2>View</h2>
+<p>All of the templates are kept in this folder. They are called directly by the 
+templating engine which then assembles the display.</p>

@@ -51,8 +51,10 @@ define('E_USER_SLOWSCRIPT', 1048);
 /**
  * where are these Ivy base files?
  */
-define('IVYPATH', dirname($_SERVER['DOCUMENT_ROOT']) . '/Ivy');
- 
+if (!defined('IVYPATH')) {
+	define('IVYPATH', $_SERVER['DOCUMENT_ROOT'] . '/Ivy');
+}
+
 /**
  * Returns how much time has passed since the TIMER constant 
    was first defined, in milliseconds.

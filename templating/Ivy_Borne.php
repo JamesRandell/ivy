@@ -366,9 +366,9 @@ private function build ($template) {
 
 					$tempPath = SITEPATH . '/shared/' . THEME . '/view/widget/' . $widgetName;	
 
-				} else if (is_readable(SITEPATH . '/site/' . SITE . '/resource/view/widget/' . $widgetName)) {
+				} else if (is_readable(SITEPATH . '/site/' . SITE . '/view/widget/' . $widgetName)) {
 					
-					$tempPath = SITEPATH . '/site/' . SITE . '/resource/view/widget/' . $widgetName;
+					$tempPath = SITEPATH . '/site/' . SITE . '/view/widget/' . $widgetName;
 			
 				}
 				

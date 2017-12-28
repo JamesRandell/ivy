@@ -189,11 +189,11 @@ public $count = 0;
 
 			foreach ($fieldArray as $field => $value) {
 				if ($tableName . $this->schema['tableSpec']['pk'][0] !== $field) {
-					if (isset($this->schema['databaseSpec']['type']) && $this->schema['databaseSpec']['type'] == 'mysql') {
-						$realField = str_replace('.', '`.`', "`$field`");
-					} else {
+					//if (isset($this->schema['databaseSpec']['type']) && $this->schema['databaseSpec']['type'] == 'mysql') {
+						//$realField = str_replace('.', '`.`', "`$field`");
+					//} else {
 						$realField = str_replace('.', '"."', '"' . $field . '"');
-					}
+					//}
 				
 					$this->query['field'][$this->schema['tableSpec']['name']][$field] = $realField . ' AS "' . $field . '"';
 				}
@@ -256,18 +256,18 @@ public $count = 0;
 						// with a full number of question marks (?), but we've now replaced one with an actual value so it will miscount
 						unset($this->db->parameter[$key]);
 
-					} else if ($value['operator'] == 'LIKE') {
+					//} else if ($value['operator'] == 'LIKE') {
 
 						/**
 					 	 * check to see if there is a like operator so we can insert the % at the end of the search string.
 					 	 * DJL (david.lodwig@curtisfitchglobal.com) - 07/12/17.
 					 	 */
 
-						$where .= '"' . $value['field'] . '" ' . $value['operator'] . ' ' . $value['value'] . '%' ;
+						//$where .= '"' . $value['field'] . '" ' . $value['operator'] . ' ' . $value['value'] . '%' ;
 
 						// we also unset this item from the parameters so it doesn't interfere with other (?). Otherwise it will still be there
 						// with a full number of question marks (?), but we've now replaced one with an actual value so it will miscount
-						unset($this->db->parameter[$key]);
+						//unset($this->db->parameter[$key]);
 					} else {
 						$where .= '"' . $value['field'] . '" ' . $value['operator'] . ' (?)';
 					}

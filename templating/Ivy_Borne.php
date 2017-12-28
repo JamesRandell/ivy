@@ -362,25 +362,16 @@ private function build ($template) {
 			case 'widget'		:				
 				$widgetName = $s[1];
 				
-				
-				if (is_readable(SITEPATH . '/site/' . SITE . '/resource/template/widget/' . $widgetName)) {
-					
-					$tempPath = SITEPATH . '/site/' . SITE . '/resource/template/widget/' . $widgetName;
-				
-				} else if (is_readable(SITEPATH . '/site/' . SITE . '/view/widget/' . $widgetName)) {
-					
-					$tempPath = SITEPATH . '/site/' . SITE . '/view/widget/' . $widgetName;
-				
-				} else if (is_readable(SITEPATH . 'shared/' . THEME . '/template/widget/' . $widgetName)) {
-					
-					$tempPath = 'shared/' . THEME . '/view/widget/' . $widgetName;					
-				
-				} else {
-					
-					$tempPath = 'shared/' . THEME . '/template/widget/' . $widgetName;
-					
-				}
+				if (is_readable(SITEPATH . '/shared/' . THEME . '/view/widget/' . $widgetName)) {
 
+					$tempPath = SITEPATH . '/shared/' . THEME . '/view/widget/' . $widgetName;	
+
+				} else if (is_readable(SITEPATH . '/site/' . SITE . '/resource/view/widget/' . $widgetName)) {
+					
+					$tempPath = SITEPATH . '/site/' . SITE . '/resource/view/widget/' . $widgetName;
+			
+				}
+				
 				if (isset($s[2])) {
 					$string = $this->getFile($tempPath);
 					$patterns[0] = "/form\/default/";

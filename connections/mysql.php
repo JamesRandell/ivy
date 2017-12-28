@@ -77,8 +77,8 @@ class MySQL {
 				return FALSE;
 			}
 			
-			$this->connection->query("SET sql_mode = 'ANSI_QUOTES'");
-			//$this->query("SET sql_mode='PIPES_AS_CONCAT'");
+			$this->connection->query("SET sql_mode = 'ANSI_QUOTES,PIPES_AS_CONCAT'");
+			//$this->connection->query("SET sql_mode='PIPES_AS_CONCAT'");
 			return $this->connection;
 			
 		}
@@ -98,7 +98,11 @@ class MySQL {
 
 		(array) $result = array ();
 
-
+		// mysql doesn't like the + sign for concat, so change it for double pipe
+		$sql = str_replace('+', '||', $sql);
+		
+		//echo $sql.'              <br><br><br>';
+		
 		if (!empty($this->parameter)) {
 			$params = array ();
 			foreach($this->parameter as $param => $value) {

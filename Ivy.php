@@ -75,20 +75,13 @@ function timerSelect () {
 }
 
 spl_autoload_register('myAutoloader');
-//echo '<pre>';
-//print_r($_SERVER);
-//echo '</pre>';
-//echo dirname($_SERVER['DOCUMENT_ROOT']);
-//die();
+
 function myAutoloader($className) {
 
     $directories = array (
 		IVYPATH . '/',
-		//'site/' . SITE . '/include/application/',
 		'site/' . SITE . '/controller/',
 		IVYPATH . '/templating/',
-		//'core/controller/',
-		//'core/interface/'
 	);
 
 	foreach ($directories as $directory) {

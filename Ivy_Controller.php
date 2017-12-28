@@ -203,7 +203,17 @@ function __construct ($registry = NULL) {
 					unset($_GET[ $key ]);
 					unset($_GET[ $key-1 ]);
 					break;
+				default			:
+					if ($_GET[$key-1] != '') {
+						$_GET[ $_GET[$key-1] ] = $value;
+					}
+					
+		
 			}
+		}
+		$verbArray = array('yes','no','true','false','on','off');
+		if (array_key_exists($key, $verbArray)) {
+			//$_GET[ $_GET[$key-1] ] = $value;
 		}
 	}
 

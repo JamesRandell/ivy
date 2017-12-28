@@ -192,10 +192,10 @@ public function addParameter ($key, $value) {
 
 		if ($_SERVER['HTTPS'] != 'on') {
 			$this->data['sharedpath'] = 'http://' . $_SERVER['SERVER_NAME'] . $tempPath . '/shared/' . THEME . '/';
-			$this->data['sharedpath'] = $tempPath . '/shared/' . THEME . '/';
+			$this->data['sharedpath'] = $tempPath . '/shared/' . THEME . '/resource/';
 		} else {
 			$this->data['sharedpath'] = 'https://' . $_SERVER['SERVER_NAME'] . $tempPath . '/shared/' . THEME . '/';
-			$this->data['sharedpath'] = $tempPath . '/shared/' . THEME . '/';
+			$this->data['sharedpath'] = $tempPath . '/shared/' . THEME . '/resource/';
 		}	
 		if (defined('EXTENSION')) {
 			$this->data['extensionpath'] = 'extension/' . EXTENSION . '/resource/';
@@ -622,6 +622,43 @@ public function addForm ($schema, $name = 'default', $fields = array ()) {
 	}
 }
 
+/**
+ * Generates a formfield
+ * 
+
+ * 
+ * @see	example/display/example basic
+ * @access	public
+ * @return	bool
+ * @param 	object|int	$schema	The ID or object of the data to use
+ * @param	string		$name	Names the entry in the template data array
+ * @param	array		$fields	Will display these fields if any are supplied
+ */
+public function addFormField ($meta, $data, $name = 'default') {
+		
+	if (is_array($meta)) {
+		// $meta is the meta if it's an array
+		$titleEncrypted = $meta['title'];
+		
+		if ($this->encrypt_field_name === true) {
+			$options = array(
+				'cost'	=>	10
+			);
+
+			//$metaField_original = $metaField;
+			//$titleEncrypted = $this->encrypt_field_name($meta['title']);
+		}
+		
+		$title = $meta['title'];
+		$type = $meta['type'];
+		
+		foreach ($meta as $key => $value) {
+			$this->data['form'][$name][$titleEncrypted]['meta'][$key] = $value;
+		}
+		
+		$this->data['form'][$name][$titleEncrypted]['data']['value'] = $data;
+	}
+}
 
 /**
  * Generates a result set
@@ -1001,9 +1038,9 @@ public function addData ($data, $name = 'default') {
 	public function removeForm ($id = NULL)
 	{
 		if ($id) {
-			unset($this->data->form[$id]);
+			unset($this->data['form'][$id]);
 		} else {
-			$this->data->form = array ();
+			$this->data['form'] = array ();
 		}
 	}
 	
@@ -1113,16 +1150,16 @@ public function addData ($data, $name = 'default') {
 
 				$settingsArray['localPath'] = SITEPATH . '/extension/' . EXTENSION . '/view/local/';
 			
-			} else if (is_readable(SITEPATH . '/site/' . SITE . '/resource/template/local/' . $template . '.htm')) {								
-				$settingsArray['localPath'] = SITEPATH . '/site/' . SITE . '/resource/template/local/';
+			} else if (is_readable(SITEPATH . '/site/' . SITE . '/resource/view/local/' . $template . '.htm')) {								
+				$settingsArray['localPath'] = SITEPATH . '/site/' . SITE . '/resource/view/local/';
 			
 			} else if (is_readable(SITEPATH . '/site/' . SITE . '/view/local/' . $template . '.htm')) {				
 
 				$settingsArray['localPath'] = SITEPATH . '/site/' . SITE . '/view/local/';
 			
-			} else if (is_readable('shared/' . THEME . '/template/local/' . $template . '.htm')) {
+			} else if (is_readable('shared/' . THEME . '/view/local/' . $template . '.htm')) {
 
-				$settingsArray['localPath'] = 'shared/' . THEME . '/template/local/';				
+				$settingsArray['localPath'] = 'shared/' . THEME . '/view/local/';				
 			
 			} else if (is_readable($template . '.htm')) {
 
@@ -1148,17 +1185,17 @@ public function addData ($data, $name = 'default') {
 		
 				$settingsArray['globalPath'] = IVYPATH . '/extension/' . $this->extension . '/view/global/';
 			
-			} else if (is_readable(SITEPATH . '/site/' . SITE . '/resource/template/global/' . $globalTemplate . '.htm')) {				
+			} else if (is_readable(SITEPATH . '/site/' . SITE . '/resource/view/global/' . $globalTemplate . '.htm')) {				
 				
-				$settingsArray['globalPath'] = SITEPATH . '/site/' . SITE . '/resource/template/global/';				
+				$settingsArray['globalPath'] = SITEPATH . '/site/' . SITE . '/resource/view/global/';				
 			
 			} else if (is_readable(SITEPATH . '/site/' . SITE . '/view/global/' . $globalTemplate . '.htm')) {				
 				
 				$settingsArray['globalPath'] = SITEPATH . '/site/' . SITE . '/view/global/';				
 			
-			} else if (is_readable('shared/' . THEME . '/template/global/' . $globalTemplate . '.htm')) {
+			} else if (is_readable('shared/' . THEME . '/view/global/' . $globalTemplate . '.htm')) {
 				
-				$settingsArray['globalPath'] = 'shared/' . THEME . '/template/global/';
+				$settingsArray['globalPath'] = 'shared/' . THEME . '/view/global/';
 			
 			} else {				
 				

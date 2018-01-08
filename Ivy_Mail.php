@@ -69,7 +69,7 @@ public function __construct ($result = null) {
 	/**
 	 * Load the PHP Mailer autoload class
 	 */
-	require 'core/system/PHPMailer/PHPMailerAutoload.php';
+	require IVYPATH . '/system/PHPMailer/PHPMailerAutoload.php';
 
 	$this->mail = new PHPMailer; 
 	

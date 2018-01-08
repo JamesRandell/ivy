@@ -462,23 +462,6 @@ public function addForm ($schema, $name = 'default', $fields = array ()) {
 		$fields = $name;
 		$name = 'default';
 	}
-	
-	if (!empty($fields)) {
-		foreach ($fields as $field) {
-		
-			if (strpos($field, '.') === false) {
-				$field = $fields[$field] = $schema->schema['tableSpec']['name'] . '.' . $field;
-			}
-
-			$dataArray['fieldSpec'][$field] = $tempDataArray['fieldSpec'][$field];
-			$dataArray['tableSpec'] = $tempDataArray['tableSpec'];
-			$dataArray['data'] = $tempDataArray['data'];
-		}
-	} else {
-		$dataArray = $tempDataArray;
-	}
-
-
 
 	/**
 	 * this function should be much faster than calling strtolower every loop
@@ -487,7 +470,25 @@ public function addForm ($schema, $name = 'default', $fields = array ()) {
 	 * CASE, but have to convert back when moving back to the view. Bit of a faff but provides 
 	 * the most portability
 	 */
-	$dataArray['fieldSpec'] = array_change_key_case($dataArray['fieldSpec'], CASE_LOWER);
+	$tempDataArray['fieldSpec'] = array_change_key_case($tempDataArray['fieldSpec'], CASE_LOWER);
+
+	
+	if (!empty($fields)) {
+		foreach ($fields as $field) {
+			$field = strtolower($field);
+			if (strpos($field, '.') === false) {
+				$field = $fields[$field] = $schema->schema['tableSpec']['name'] . '.' . $field;
+			}
+			
+			$dataArray['fieldSpec'][$field] = $tempDataArray['fieldSpec'][$field];
+			$dataArray['tableSpec'] = $tempDataArray['tableSpec'];
+			$dataArray['data'] = $tempDataArray['data'];
+		}
+	} else {
+		$dataArray = $tempDataArray;
+	}
+
+	
 
 	/**
 	 * change the case for the data too or it may not match up if you've used camelcase in the model file!

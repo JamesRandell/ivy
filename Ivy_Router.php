@@ -66,6 +66,28 @@ class Ivy_Router {
 		}
 
 		$this->registry->insertSystem('config', $parserArray);
+
+		/* AWS PATCH */
+		/* Have a look for the aws config key and if it exists we will get the enviroment variables from an AWS 
+		elastic enviroment */
+
+		if ( $this->registry->selectSystem('aws') == 'true' )
+		{
+			/* OK assemble an array of the AWS Values, these are pretty fixed */
+			$aws = array 
+			( 
+				'db' => array
+				(
+					'server' 	=> $_SERVER['RDS_HOSTNAME'],
+					'database' 	=> $_SERVER['RDS_DB_NAME'],
+					'username' 	=> $_SERVER['RDS_USERNAME'],
+					'password' 	=> $_SERVER['RDS_PASSWORD'],
+				) 
+			) ;
+
+			/* OK push this into the registry */
+			$this->registry->insertSystem('config', $aws) ;
+		}
 		
 		if (is_dir(SITEPATH . '/site/' . SITE)) {
 			require	SITEPATH . '/site/' . SITE . '/system/array.php';

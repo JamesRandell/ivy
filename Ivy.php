@@ -94,7 +94,7 @@ spl_autoload_register ( function ( $className )
 	{
 		if (is_file($directory . $className . '.php')) 
 		{
-			require_once $directory . $className . '.php';
+			include $directory . $className . '.php';
 			return;
 		}
 	}

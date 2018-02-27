@@ -76,25 +76,29 @@ function timerSelect () {
 	return $diff;
 }
 
-spl_autoload_register('myAutoloader');
-
-function myAutoloader($className) {
-
-    $directories = array (
+# DJL 27/02/18
+# Patch added to cope with being on linux servers
+spl_autoload_register ( function ( $className ) 
+{
+	$directories = array 
+	(
 		IVYPATH . '/',
 		'site/' . SITE . '/controller/',
 		IVYPATH . '/templating/',
-	);
+	) ;
 
-	foreach ($directories as $directory) {
-		if (is_file($directory . $className . '.php')) {
+	var_dump( $directories ) ;
+
+	foreach ($directories as $directory) 
+	{
+		if (is_file($directory . $className . '.php')) 
+		{
 			require_once $directory . $className . '.php';
 			return;
 		}
 	}
-
-
 }
+
 /*
 function __autoload($class_name) {
 	$directories = array (

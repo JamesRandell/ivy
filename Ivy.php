@@ -95,7 +95,7 @@ spl_autoload_register ( function ( $className )
 			return;
 		}
 	}
-}
+} ) ;
 
 /*
 function __autoload($class_name) {

@@ -88,6 +88,7 @@ spl_autoload_register ( function ( $className )
 	) ;
 
 	var_dump( $directories ) ;
+	die() ;
 
 	foreach ($directories as $directory) 
 	{

@@ -87,9 +87,6 @@ spl_autoload_register ( function ( $className )
 		IVYPATH . '/templating/',
 	) ;
 
-	var_dump( $directories ) ;
-	die() ;
-
 	foreach ($directories as $directory) 
 	{
 		if (is_file($directory . $className . '.php')) 

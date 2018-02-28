@@ -73,7 +73,7 @@ class Ivy_Router {
 
 		$awsConfig = $this->registry->selectSystem('config') ;
 
-		if ( $awsConfig['aws'] == 1 )
+		if ( $awsConfig['db']['aws'] == 1 )
 		{
 			/* OK assemble an array of the AWS Values, these are pretty fixed */
 			$aws = array 

@@ -71,7 +71,9 @@ class Ivy_Router {
 		/* Have a look for the aws config key and if it exists we will get the enviroment variables from an AWS 
 		elastic enviroment */
 
-		if ( $this->registry->selectSystem('aws') == 'true' )
+		$awsConfig = $this->registry->selectSystem('config') ;
+
+		if ( $awsConfig['aws'] == 1 )
 		{
 			/* OK assemble an array of the AWS Values, these are pretty fixed */
 			$aws = array 

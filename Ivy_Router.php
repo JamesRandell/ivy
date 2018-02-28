@@ -78,10 +78,10 @@ class Ivy_Router {
 			( 
 				'db' => array
 				(
-					'server' 	=> $_SERVER['RDS_HOSTNAME'],
-					'database' 	=> $_SERVER['RDS_DB_NAME'],
-					'username' 	=> $_SERVER['RDS_USERNAME'],
-					'password' 	=> $_SERVER['RDS_PASSWORD'],
+					'server' 	=> getenv ( "RDS_HOSTNAME" ),
+					'database' 	=> getenv ( "RDS_DB_NAME" ),
+					'username' 	=> getenv ( "RDS_USERNAME" ),
+					'password' 	=> getenv ( "RDS_PASSWORD" ),
 				) 
 			) ;
 

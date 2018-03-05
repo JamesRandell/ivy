@@ -34,8 +34,12 @@ unset($site);
 
 /**
  * The full path of the orininal site location
+ * DJL 05/03/18 - So sitepath can be defined in the app loader.
  */
-define('SITEPATH', dirname($_SERVER['SCRIPT_FILENAME']));
+if ( !defined ( 'SITEPATH' ) )
+{
+	define ( 'SITEPATH', dirname ( $_SERVER['SCRIPT_FILENAME'] ) ) ;
+}
 
 /**
  * Start the timer

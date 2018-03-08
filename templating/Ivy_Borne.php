@@ -128,8 +128,8 @@ public $output = true;
 				file_put_contents(SITEPATH . '/site/' . SITE . '/resource/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm', $var);
 				return $this->build(SITEPATH . '/site/' . SITE . '/resource/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm');
 			} else {
-				file_put_contents('shared/' . THEME . '/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm', $var);
-				return $this->build('shared/' . THEME . '/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm');
+				file_put_contents( SITEPATH . '/shared/' . THEME . '/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm', $var);
+				return $this->build( SITEPATH . '/shared/' . THEME . '/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm');
 			}
 		}
 	}
@@ -415,12 +415,12 @@ private function build ($template) {
 							$tempPath = SITEPATH . '/site/' . SITE . '/resource/template/widget/' . $widget;					
 						} else if (is_readable(SITEPATH . '/site/' . SITE . '/view/widget/' . $widget)) {						
 								   $tempPath = SITEPATH . '/site/' . SITE . '/view/widget/' . $widget;					
-						} else if (is_readable('extension/' . EXTENSION . '/view/widget/' . $widget)) {						
-								   $tempPath = 'extension/' . EXTENSION . '/view/widget/' . $widget;					
-						} else if (is_readable('shared/' . THEME . '/template/widget/' . $widget)) {						
-							$tempPath = 'shared/' . THEME . '/template/widget/' . $widget;					
+						} else if (is_readable(SITEPATH . '/extension/' . EXTENSION . '/view/widget/' . $widget)) {						
+								   $tempPath = SITEPATH . '/extension/' . EXTENSION . '/view/widget/' . $widget;					
+						} else if (is_readable(SITEPATH . '/shared/' . THEME . '/template/widget/' . $widget)) {						
+							$tempPath = SITEPATH . '/shared/' . THEME . '/template/widget/' . $widget;					
 						} else {						
-							$tempPath = 'shared/' . THEME . '/template/widget/' . $widget;						
+							$tempPath = SITEPATH . '/shared/' . THEME . '/template/widget/' . $widget;						
 						}
 					}
 					$result = $this->processInclude($tempPath);

@@ -1160,7 +1160,11 @@ public function addData ($data, $name = 'default') {
 			
 			} else if (is_readable('shared/' . THEME . '/view/local/' . $template . '.htm')) {
 
-				$settingsArray['localPath'] = 'shared/' . THEME . '/view/local/';				
+				$settingsArray['localPath'] = 'shared/' . THEME . '/view/local/';
+
+			} else if (is_readable( SITEPATH . '/shared/' . THEME . '/view/local/' . $template . '.htm')) {
+
+				$settingsArray['localPath'] = SITEPATH . '/shared/' . THEME . '/view/local/';					
 			
 			} else if (is_readable($template . '.htm')) {
 
@@ -1197,6 +1201,10 @@ public function addData ($data, $name = 'default') {
 			} else if (is_readable('shared/' . THEME . '/view/global/' . $globalTemplate . '.htm')) {
 				
 				$settingsArray['globalPath'] = 'shared/' . THEME . '/view/global/';
+
+			} else if ( is_readable (  SITEPATH . '/shared/' . THEME . '/view/global/' . $globalTemplate . '.htm' ) ) {
+				
+				$settingsArray['globalPath'] =  SITEPATH . '/shared/' . THEME . '/view/global/';
 			
 			} else {				
 				

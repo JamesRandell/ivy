@@ -1098,7 +1098,7 @@ public function addData ($data, $name = 'default') {
 
 		if (isset($this->data['system']['script'])) {
 			
-			$cachedScript = Ivy_File::select('site/' . SITE . '/resource/cache/script');
+			$cachedScript = Ivy_File::select(SITEPATH . '/site/' . SITE . '/resource/cache/script');
 						
 			$js = '';
 			foreach ($this->data['system']['script'] as $key => $value) {

@@ -192,10 +192,10 @@ public function addParameter ($key, $value) {
 
 		if ($_SERVER['HTTPS'] != 'on') {
 			$this->data['sharedpath'] = 'http://' . $_SERVER['SERVER_NAME'] . $tempPath . '/shared/' . THEME . '/';
-			$this->data['sharedpath'] = $tempPath . '/shared/' . THEME . '/resource/';
+			$this->data['sharedpath'] = '/shared/' . THEME . '/resource/';
 		} else {
 			$this->data['sharedpath'] = 'https://' . $_SERVER['SERVER_NAME'] . $tempPath . '/shared/' . THEME . '/';
-			$this->data['sharedpath'] = $tempPath . '/shared/' . THEME . '/resource/';
+			$this->data['sharedpath'] = '/shared/' . THEME . '/resource/';
 		}	
 		if (defined('EXTENSION')) {
 			$this->data['extensionpath'] = 'extension/' . EXTENSION . '/resource/';

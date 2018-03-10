@@ -192,10 +192,10 @@ public function addParameter ($key, $value) {
 
 		if ($_SERVER['HTTPS'] != 'on') {
 			$this->data['sharedpath'] = 'http://' . $_SERVER['SERVER_NAME'] . $tempPath . '/shared/' . THEME . '/';
-			$this->data['sharedpath'] = '/shared/' . THEME . '/resource/';
+			$this->data['sharedpath'] = $tempPath . '/shared/' . THEME . '/resource/';
 		} else {
 			$this->data['sharedpath'] = 'https://' . $_SERVER['SERVER_NAME'] . $tempPath . '/shared/' . THEME . '/';
-			$this->data['sharedpath'] = '/shared/' . THEME . '/resource/';
+			$this->data['sharedpath'] = $tempPath . '/shared/' . THEME . '/resource/';
 		}	
 		if (defined('EXTENSION')) {
 			$this->data['extensionpath'] = 'extension/' . EXTENSION . '/resource/';
@@ -463,6 +463,27 @@ public function addForm ($schema, $name = 'default', $fields = array ()) {
 		$name = 'default';
 	}
 
+	if (!empty($fields)) {
+		$dataArray['fieldSpec'] = array ();
+		foreach ($fields as $field) {
+			//$fields[strtolower($field)] = strtolower($field);
+			//echo $field.'<br>';
+			if (strpos($field, '.') === false) {
+				$field = $fields[$field] = $schema->schema['tableSpec']['name'] . '.' . $field;
+			}
+			$fields[$field] = $field;
+
+			$dataArray['fieldSpec'][$field] = $tempDataArray['fieldSpec'][$field];
+			$dataArray['tableSpec'] = $tempDataArray['tableSpec'];
+			$dataArray['data'] = $tempDataArray['data'];
+			
+			$fields[$field] = strtolower($field);
+		}
+	} else {
+		$dataArray = $tempDataArray;
+	}
+
+
 	/**
 	 * this function should be much faster than calling strtolower every loop
 	 * we do this because form the MODEL the keys are unchanged and we use whatever case
@@ -470,26 +491,9 @@ public function addForm ($schema, $name = 'default', $fields = array ()) {
 	 * CASE, but have to convert back when moving back to the view. Bit of a faff but provides 
 	 * the most portability
 	 */
-	$tempDataArray['fieldSpec'] = array_change_key_case($tempDataArray['fieldSpec'], CASE_LOWER);
-
+	$dataArray['fieldSpec'] = array_change_key_case($dataArray['fieldSpec'], CASE_LOWER);
+	$fields = array_change_key_case($fields, CASE_LOWER);
 	
-	if (!empty($fields)) {
-		foreach ($fields as $field) {
-			$field = strtolower($field);
-			if (strpos($field, '.') === false) {
-				$field = $fields[$field] = $schema->schema['tableSpec']['name'] . '.' . $field;
-			}
-			
-			$dataArray['fieldSpec'][$field] = $tempDataArray['fieldSpec'][$field];
-			$dataArray['tableSpec'] = $tempDataArray['tableSpec'];
-			$dataArray['data'] = $tempDataArray['data'];
-		}
-	} else {
-		$dataArray = $tempDataArray;
-	}
-
-	
-
 	/**
 	 * change the case for the data too or it may not match up if you've used camelcase in the model file!
 	 */
@@ -498,12 +502,12 @@ public function addForm ($schema, $name = 'default', $fields = array ()) {
 	}
 	foreach ($dataArray['fieldSpec'] as $metaField => $metaArray) {	
 
+		$metaField_original = $metaField;
 		if ($this->encrypt_field_name === true) {
 			$options = array(
 				'cost'	=>	10
 			);
 
-			$metaField_original = $metaField;
 			$metaField = $this->encrypt_field_name($metaField);
 		}
 
@@ -514,11 +518,11 @@ public function addForm ($schema, $name = 'default', $fields = array ()) {
 		}
 
 		if (!isset($metaArray['front']['nobuild'])) {
-				
+			
 			if (!empty($fields) && !in_array($metaField_original, $fields)) {
 				continue;
 			}
-				
+
 			foreach ($metaArray['front'] as $key => $value) {
 				$this->data['form'][$name][$metaField]['meta'][$key] = $value;
 			}
@@ -559,7 +563,12 @@ public function addForm ($schema, $name = 'default', $fields = array ()) {
 					break;
 				default			:
 					$finalValue = (isset($dataArray['data'][0]['_'.$metaField_original]) ? $dataArray['data'][0]['_'.$metaField_original] : $dataArray['data'][0][$metaField_original]);
-					$finalValue = trim($finalValue);
+					// do a check to see if the value is that of a date object
+					if (is_a($finalValue, 'DateTime')) {
+						$finalValue = $finalValue->format('m/d/y H:i');
+					} else {
+						$finalValue = trim($finalValue);
+					}
 			}
 
 
@@ -601,15 +610,15 @@ public function addForm ($schema, $name = 'default', $fields = array ()) {
 			$this->data['form'][$name][$metaField]['data']['value'] = $finalValue;
 
 			if ($metaArray['back']['type'] == 'unix') {
-				if (isset($dataArray['data'][0][$metaField])) {
-					if (strlen($dataArray['data'][0][$metaField]) == 10 && is_numeric($dataArray['data'][0][$metaField])) {
+				if (isset($dataArray['data'][0][$metaField_original])) {
+					if (strlen($dataArray['data'][0][$metaField_original]) == 10 && is_numeric($dataArray['data'][0][$metaField_original])) {
 						$this->data['form'][$name][$metaField]['data']['value'] = date($config['system']['unixformat'], $dataArray['data'][0][$metaField]);
 					} else {
-						$this->data['form'][$name][$metaField]['data']['value'] = $dataArray['data'][0][$metaField];
+						$this->data['form'][$name][$metaField]['data']['value'] = $dataArray['data'][0][$metaField_original];
 					}
 						
 					if ($metaArray['front']['type'] == 'hidden') {
-						$this->data['form'][$name][$metaField]['data']['value'] = $dataArray['data'][0][$metaField];
+						$this->data['form'][$name][$metaField]['data']['value'] = $dataArray['data'][0][$metaField_original];
 					}
 				}
 			}				
@@ -654,7 +663,13 @@ public function addFormField ($meta, $data, $name = 'default') {
 		$type = $meta['type'];
 		
 		foreach ($meta as $key => $value) {
-			$this->data['form'][$name][$titleEncrypted]['meta'][$key] = $value;
+		
+			if (strpos($key, 'data-') !== false) {
+				$key = substr_replace($key, '', 0, 5);
+				$this->data['form'][$name][$titleEncrypted]['meta']['data'][$key] = $value;
+			} else {
+				$this->data['form'][$name][$titleEncrypted]['meta'][$key] = $value;
+			}
 		}
 		
 		$this->data['form'][$name][$titleEncrypted]['data']['value'] = $data;

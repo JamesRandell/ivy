@@ -58,7 +58,7 @@ class MySQL {
 			} else {
 				$registry = Ivy_Registry::getInstance();
 				$config = $registry->selectSystem('config');
- 			
+			
 				$this->server = $config['db']['server'];
 				$this->database = $config['db']['database'];
 				$this->username = $config['db']['username'];

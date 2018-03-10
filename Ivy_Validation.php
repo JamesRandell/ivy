@@ -111,7 +111,7 @@ public $error = false;
 					$optionsValue = $this->schema['fieldSpec'][$field]['options']['value'];
 					$optionsTable = $this->schema['fieldSpec'][$field]['options']['table'];
 					
-					$temp = new Ivy_Database('table_' . $optionsTable);
+					$temp = new Ivy_Model('table_' . $optionsTable);
 					$temp->select($optionsKey . " = '$value'", array($optionsValue));
 					
 					if (isset($temp->data[0])) {
@@ -143,14 +143,14 @@ public $error = false;
 					# we end up trying to validate attributes that are turned off.
 					# DJL 13/07/17
 					if ( $value != 'n' AND $value != 'N' ) {
-						
-						$returnedValue = self::$method($value, $dataArray[$field], $this->schema['fieldSpec'][$field]['front']['title'], $field);
+						//$field = strtolower($field);
+						$returnedValue = self::$method($value, $dataArray[$field], $this->schema['fieldSpec'][$field]['front']['title'], strtolower($field));
 
 						// Has an error been returned?
 						if (isset($returnedValue['error'])) {
 							$this->registry->insertError(
 							
-								$ttt = array('field'	=>	$field,
+								$ttt = array('field'	=>	strtolower($field),
 									'title'		=> 	$this->schema['fieldSpec'][$field]['front']['title'],
 									'spec'		=>	$attribute,
 									'property'	=>	$value,
@@ -290,6 +290,18 @@ public $error = false;
 
 				return array('value'=>strtotime($value));
 				break;
+			case 'datetime'	:
+				if (($timestamp = strtotime($value)) === false) {
+					
+					return array('error'=>"The value can't be converted to a date",
+									'value'=>$value);
+				} else {
+					$date = date_create($value);
+					
+					return array('value'=>date_format($date, 'Y-m-d H:i:s'));
+				}
+				
+				break;
 		}
 	}
 	
@@ -350,10 +362,9 @@ public $error = false;
 	 */
 	private function errorCheck_unique ($option, $value, $title, $field) {
 		if (isset($this->query['type']) && $this->query['type'] == 'insert') {
-			$obj = new Ivy_Database($this->schema['tableSpec']['name']);
+			$obj = new Ivy_Model($this->schema['tableSpec']['name']);
 			$result = $obj->db->query('select count(' . $field . ')  as "0"
 				from ' . $this->schema['tableSpec']['name'] . ' WHERE ' . $field . " = '$value'");
-	
 			if ($result[0][0] != 0) {
 				return array('error'=>'This has already been taken, please choose another');
 			}
@@ -649,6 +660,11 @@ public $error = false;
 		}
 	}
 	
+	private function errorCheck_format ($option, $value) {
+	
+		return array('value'=>$value);
+		
+	}
 	
 	/*
 	 * Looks at the join attribute to see if it's members exists.

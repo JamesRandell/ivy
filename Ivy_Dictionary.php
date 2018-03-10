@@ -205,27 +205,52 @@ class Ivy_Dictionary {
 				 * more than one field is specified, so get those columns and concatenate the result
 				 */
 				$tempValue = '';
-				if (is_array($value)) {
-					$tempValue = 'CONCAT(';
-					foreach ($value as $optionField) {
-						$tempValue .= $optionField . ",' ',";
+				$originalValue = $value;
+		
+				if (is_array($value)) {											
+					foreach ($value['fields'] as $optionField) {
+						$tempValue .= $newTable . '.' . $optionField . ',';
 					}
-					
-					$tempValue = substr($tempValue, 0, -5) . ')';
-					$value = $tempValue;
+					$tempValue = substr($tempValue, 0, -1);
+				} else {
+					$tempValue = $value . ' AS value';
 				}
 
+				$value = $tempValue;
+				
 				(string) $where = '';
 				
-				if (isset($specialArray['fieldSpec'][$field]['options']['where'])) {
-					$where = ' WHERE ' . $specialArray['fieldSpec'][$field]['options']['where'];
+				if (isset($array['fieldSpec'][$field]['options']['where'])) {
+					$where = ' WHERE ' . $array['fieldSpec'][$field]['options']['where'];
 				}
-				
-				$tempResult = $this->db->query('SELECT ' . $key . ',' . $value . ' AS value FROM ' . $newTable . $where . ' ORDER BY ' . $newTable . '.' . $key . ' ASC');
+//echo 'SELECT ' . $newTable . '.' . $key . ',' . $value . ' FROM ' . $newTable . $where . ' ORDER BY ' . $newTable . '.' . $key . ' ASC';
+				$tempResult = $this->db->query('SELECT ' . $newTable . '.' . $key . ',' . $value . ' FROM ' . $newTable . $where . ' ORDER BY ' . $newTable . '.' . $key . ' ASC');
 				#$result = $tempResult;
 
 				foreach($tempResult as $row => $data) {
 					$result[$data[$key]] = $data['value'];
+					$y = $originalValue['format'];
+					
+					if (is_array($originalValue)) {
+						foreach ($originalValue['fields'] as $optionField) {
+							// check if the user has supplied the table name, if not - prefix each field with the table 
+							$pos = strpos($y, '(?)');
+							if ($pos !== false) {
+								$y = substr_replace($y,$data[$optionField],$pos,strlen('(?)'));
+							}
+						}
+						
+						$result[$data[$key]] = $y;
+					}
+				}
+				
+				
+				if (isset($array['fieldSpec'][$field]['options']['prepend'])) {
+					$result = $array['fieldSpec'][$field]['options']['prepend']+$result;
+				}
+				
+				if (isset($array['fieldSpec'][$field]['options']['append'])) {
+					$result = $result+$array['fieldSpec'][$field]['options']['append'];
 				}
 				
 				$t['fieldSpec'][$table.'.'.$field]['front']['option'] = $result;
@@ -402,12 +427,16 @@ class Ivy_Dictionary {
 				if (isset($queryArray['fieldSpec'][$field])) {
 					switch ($queryArray['fieldSpec'][$field]['back']['type']) {
 						case 'unix'		:
+							if (isset($queryArray['fieldSpec'][$field]['back']['format'])) {
+								$unixDateFormat = $queryArray['fieldSpec'][$field]['back']['format'];
+							}
+							
 							if (is_numeric($queryArray['data'][$rowNo][$field]) && strlen($queryArray['data'][$rowNo][$field]) == 10) {
 								$queryArray['data'][$rowNo]['_'.$field] = $queryArray['data'][$rowNo][$field];
 								$queryArray['data'][$rowNo][$field] = date($unixDateFormat, $queryArray['data'][$rowNo][$field]);
 
 								if (date("Hi", $queryArray['data'][$rowNo]['_'.$field]) <= '0100') {
-									$queryArray['data'][$rowNo][$field] = date("jS F Y", $queryArray['data'][$rowNo]['_'.$field]);
+									$queryArray['data'][$rowNo][$field] = date($unixDateFormat, $queryArray['data'][$rowNo]['_'.$field]);
 								}
 							} else {
 								$this->error->add(array('content' 	=>'Error converting unix timestamp to a human readable one',
@@ -426,8 +455,8 @@ class Ivy_Dictionary {
 							}
 							else
 							{
-							
-								$myDateTime = DateTime::createFromFormat('Y-m-d H:i:s.u', $value);
+							//echo $value;
+								$myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $value);
 								$queryArray['data'][$rowNo]['_'.$field] = $myDateTime;
 							
 								if (isset($queryArray['fieldSpec'][$field]['back']['format'])) {
@@ -442,7 +471,7 @@ class Ivy_Dictionary {
 																'id' 		=>$rowNo));
 									}
 								} else {
-									$queryArray['data'][$rowNo][$field] = $myDateTime->format('Y-m-d H:i:s.u');
+									$queryArray['data'][$rowNo][$field] = $myDateTime->format('Y-m-d H:i:s');
 								}
 							}
 							break;

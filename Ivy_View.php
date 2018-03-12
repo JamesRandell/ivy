@@ -1375,32 +1375,64 @@ public function addData ($data, $name = 'default') {
 
 	
 	
-private function encrypt_field_name ($fieldName) {
-	return openssl_encrypt($fieldName, 'AES-256-CBC', 'supersecretkey');
-}
-
-private function decrypt_field_name ($fieldName) {
-	return openssl_decrypt($fieldName, 'AES-256-CBC', 'supersecretkey');
-}
-
-private function language () {
-
-	/*
-	 * no language has been specified (well it has but it's 'default')
-	 */
-	if ($this->data['system']['stat']['client']['language'] == 'default') {
-		
-
-		/*
-		 * do stuff with $this->data
-		 */
-		// loop through phrases
-		// for each one, add to $this->data['phrase'] (can do as an entire array)
-		$this->data['phrase']['test'] = 'German phrase';
+	private function encrypt_field_name ($fieldName) 
+	{
+		return openssl_encrypt($fieldName, 'AES-256-CBC', 'supersecretkey');
 	}
 
-}
+	private function decrypt_field_name ($fieldName) 
+	{
+		return openssl_decrypt($fieldName, 'AES-256-CBC', 'supersecretkey');
+	}
 
+	private function language () 
+	{
+		$encoding = 'UTF-8';
+
+		if ($this->registry->selectSession('locale')) 
+		{
+			$locale = $this->registry->selectSession('locale');
+		} else {
+			$locale = 'en_GB';
+			$this->registry->insertSession('locale', $locale);
+		}
+	
+		putenv("LANG=" . $locale); 
+		setlocale(LC_ALL, $locale);
+
+		$file = SITE;
+
+		// path to the .MO file that we should monitor
+		$filename = SITEPATH . '/site/' . SITE . '/resource/locale/' . $locale . '/LC_MESSAGES/' . $file . '.mo';
+		$mtime = filemtime($filename); // check its modification time
+
+		// our new unique .MO file
+		$filename_new = SITEPATH . '/site/' . SITE . '/resource/cache/locale/'. $locale . '/LC_MESSAGES/' . $file . '_' . $mtime . '.mo'; 
+
+		if (!file_exists($filename_new)) 
+		{ 
+			// check if we have created it before
+			// if not, create it now, by copying the original
+		
+			if (!file_exists ( SITEPATH . '/site/' . SITE . '/resource/cache/locale/'. $locale . '/LC_MESSAGES/')) 
+			{
+    			mkdir ( SITEPATH . '/site/' . SITE . '/resource/cache/locale/'. $locale . '/LC_MESSAGES/', 0777, true);
+			}
+
+ 			copy ( $filename,$filename_new ) ;
+ 		}
+ 		
+ 		// compute the new domain name
+ 		$domain_new = rtrim($file . '_' . $mtime);
+
+		// bind it
+ 		bindtextdomain($domain_new, SITEPATH . '/site/' . SITE . '/resource/cache/locale');
+ 		bind_textdomain_codeset($domain_new, $encoding);
+
+ 		// then activate it
+ 		textdomain($domain_new);
+	
+	}	
 
 }
 

@@ -1390,22 +1390,18 @@ public function addData ($data, $name = 'default') {
 
 	
 	
-	private function encrypt_field_name ($fieldName) 
-	{
+	private function encrypt_field_name ($fieldName) {
 		return openssl_encrypt($fieldName, 'AES-256-CBC', 'supersecretkey');
 	}
 
-	private function decrypt_field_name ($fieldName) 
-	{
+	private function decrypt_field_name ($fieldName) {
 		return openssl_decrypt($fieldName, 'AES-256-CBC', 'supersecretkey');
 	}
 
-	private function language () 
-	{
+	private function language () {
 		$encoding = 'UTF-8';
 
-		if ($this->registry->selectSession('locale')) 
-		{
+		if ($this->registry->selectSession('locale')) {
 			$locale = $this->registry->selectSession('locale');
 		} else {
 			$locale = 'en_GB';
@@ -1424,8 +1420,7 @@ public function addData ($data, $name = 'default') {
 		// our new unique .MO file
 		$filename_new = SITEPATH . '/site/' . SITE . '/resource/cache/locale/'. $locale . '/LC_MESSAGES/' . $file . '_' . $mtime . '.mo'; 
 
-		if (!file_exists($filename_new)) 
-		{ 
+		if (!file_exists($filename_new)) { 
 			// check if we have created it before
 			// if not, create it now, by copying the original
 		
@@ -1446,7 +1441,6 @@ public function addData ($data, $name = 'default') {
 
  		// then activate it
  		textdomain($domain_new);
-	
 	}	
 
 }

@@ -227,6 +227,50 @@ class Ivy_Router {
 			if (!$queryParts[0]) {
 				array_shift($queryParts);
 			}
+
+			$sessionArray = $this->registry->selectSession();
+			$keys = $this->registry->selectSystem('keys');
+			$arrAvailableLocaleList = $keys['locale'];
+			
+			if (!isset($sessionArray['localeList'])) 
+			{
+				foreach ($arrAvailableLocaleList as $key => $value) 
+				{
+					$data =  explode('_', $key);
+					$sessionArray['localeList'][$key] = array (	'title'	=> $value,
+															'language'	=> $data[0],
+															'country'	=> $data[1] ) ;
+				}
+
+				$this->registry->insertSession ( $sessionArray ) ;
+			}
+
+			// check if the first URL parameter exists in the locale list
+			if ($sessionArray['localeList'][$queryParts[0]]) 
+			{
+				$this->locale = $queryParts[0];
+				array_shift($queryParts);
+			} else {
+				// if it doesn't exist then it may not be a language code, just the name of the controller.
+				// in this case don't overwrite the locale, see if there is one in the session
+				if (isset($sessionArray['locale'])) {
+					$this->locale = $sessionArray['locale'];
+				} else {
+					
+				}
+			}
+
+			if ($arrAvailableLocaleList[$queryParts[0]]) 
+			{
+				$this->locale = $queryParts[0];
+			}
+					
+			$sessionArray['locale'] = $this->locale;
+			$sessionArray['language'] = $sessionArray['localeList'][$this->locale]['title'];
+			$sessionArray['country'] = $sessionArray['localeList'][$this->locale]['country'];
+			$this->registry->insertSession($sessionArray);
+		
+			$sessionArray = $this->registry->selectSession();
 			
 			/**
 			 * assign controller

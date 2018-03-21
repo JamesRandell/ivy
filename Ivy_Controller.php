@@ -478,7 +478,7 @@ private function _permissionLoop ($array) {
 				//$array[$key]['children'] = $this->_permissionLoop($data['children']);
 			}//
 			//$this->authorised = 0;
-			break;
+			continue;
 		}
 
 		if ($data['controller'] == CONTROLLER && $data['action'] == 'index') {

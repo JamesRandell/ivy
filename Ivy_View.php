@@ -11,7 +11,7 @@
  * @package Template
  * @updated	23rd April, 2012
  *
- * Testing a change
+ * 
  * 
  */
 class Ivy_View {

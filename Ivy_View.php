@@ -1419,16 +1419,36 @@ public function addData ($data, $name = 'default') {
 		$filename = SITEPATH . '/site/' . SITE . '/resource/locale/' . $locale . '/LC_MESSAGES/' . $file . '.mo';
 		$mtime = filemtime($filename); // check its modification time
 
-		// our new unique .MO file
-		$filename_new = SITEPATH . '/site/' . SITE . '/resource/cache/locale/'. $locale . '/LC_MESSAGES/' . $file . '_' . $mtime . '.mo'; 
+		/**
+		 * Handle the cache location parameter in the config file, this is only
+		 * really useful if you need to move the cache to a path outside the webroot for 
+		 * security or build purposes.
+		 * 05/06/2018	David J. Lodwig		<david.lodwig@davelodwig.co.uk>
+		 */
+		
+		$pathCheck = $this->registry->selectSystem('config') ;
+		
+		if ( isset ( $pathCheck['cache']['root'] ) ) {
 
-		if (!file_exists($filename_new)) { 
+			$CacheRoot = $pathCheck['cache']['root'] ;
+
+		} else {
+
+			$CacheRoot = SITEPATH ;
+
+		}
+
+		$filename_new = $CacheRoot . '/site/' . SITE . '/resource/cache/locale/'. $locale . '/LC_MESSAGES/' . $file . '_' . $mtime . '.mo'; 
+
+		if ( !file_exists( $filename_new ) ) { 
+			
 			// check if we have created it before
 			// if not, create it now, by copying the original
 		
-			if (!file_exists ( SITEPATH . '/site/' . SITE . '/resource/cache/locale/'. $locale . '/LC_MESSAGES/')) 
-			{
-    			mkdir ( SITEPATH . '/site/' . SITE . '/resource/cache/locale/'. $locale . '/LC_MESSAGES/', 0777, true);
+			if (!file_exists ( $CacheRoot . '/site/' . SITE . '/resource/cache/locale/'. $locale . '/LC_MESSAGES/')) {
+    				
+    			mkdir ( $CacheRoot . '/site/' . SITE . '/resource/cache/locale/'. $locale . '/LC_MESSAGES/', 0777, true);
+			
 			}
 
  			copy ( $filename,$filename_new ) ;
@@ -1438,7 +1458,7 @@ public function addData ($data, $name = 'default') {
  		$domain_new = rtrim($file . '_' . $mtime);
 
 		// bind it
- 		bindtextdomain($domain_new, SITEPATH . '/site/' . SITE . '/resource/cache/locale');
+		bindtextdomain($domain_new, $CacheRoot . '/site/' . SITE . '/resource/cache/locale');
  		bind_textdomain_codeset($domain_new, $encoding);
 
  		// then activate it

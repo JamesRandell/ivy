@@ -112,8 +112,24 @@ public $output = true;
 		$globalTemplateCache = str_replace('/', '-slash-', $globalTemplate);
 		$localTemplateCache = str_replace('/', '-slash-', $localTemplate);
 		
+		/**
+		 * Handle the cache location parameter in the config file, this is only
+		 * really useful if you need to move the cache to a path outside the webroot for 
+		 * security or build purposes.
+		 * 05/06/2018	David J. Lodwig		<david.lodwig@davelodwig.co.uk>
+		 */
+		
+		if ( isset ( $this->config['cache']['root'] ) ) { 
 
-		if (!file_exists(SITEPATH . '/site/' . SITE . '/resource/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm') || $config['output']['cache'] == 0) {
+			$CacheRoot = $this->config['cache']['root'] ;
+
+		} else {
+
+			$CacheRoot = SITEPATH ;
+		}
+		
+
+		if (!file_exists( $CacheRoot . '/site/' . SITE . '/resource/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm') || $config['output']['cache'] == 0) {
 
 			$string = $this->getFile($this->globalPath . $globalTemplate . '.htm');
 
@@ -125,11 +141,11 @@ public $output = true;
 			$var = str_replace("\xEF\xBB\xBF",'',$var);
 			
 			if (is_dir(SITEPATH . '/site/' . SITE)) {
-				file_put_contents(SITEPATH . '/site/' . SITE . '/resource/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm', $var);
-				return $this->build(SITEPATH . '/site/' . SITE . '/resource/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm');
+				file_put_contents($CacheRoot . '/site/' . SITE . '/resource/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm', $var);
+				return $this->build($CacheRoot . '/site/' . SITE . '/resource/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm');
 			} else {
-				file_put_contents( SITEPATH . '/shared/' . THEME . '/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm', $var);
-				return $this->build( SITEPATH . '/shared/' . THEME . '/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm');
+				file_put_contents( $CacheRoot . '/shared/' . THEME . '/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm', $var);
+				return $this->build( $CacheRoot . '/shared/' . THEME . '/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm');
 			}
 		}
 	}

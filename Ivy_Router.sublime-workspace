@@ -1,0 +1,624 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"style",
+				"stylesheet"
+			],
+			[
+				"acces",
+				"accessToken"
+			],
+			[
+				"text-",
+				"text-center"
+			],
+			[
+				"col-",
+				"col-xs-6"
+			],
+			[
+				"col",
+				"col-xs-6"
+			],
+			[
+				"parent",
+				"parent_id"
+			],
+			[
+				"share_",
+				"share_email"
+			],
+			[
+				"get",
+				"getElementById"
+			],
+			[
+				"onkey",
+				"onkeyup\tAttr"
+			],
+			[
+				"search",
+				"searchresult"
+			],
+			[
+				"ser",
+				"serialize"
+			],
+			[
+				"data",
+				"dataType"
+			],
+			[
+				"on",
+				"onkeypress\tAttr"
+			],
+			[
+				"parentColle",
+				"parentCollectionID"
+			],
+			[
+				"bread",
+				"breadcrumbArray"
+			],
+			[
+				"pare",
+				"parentCollection"
+			],
+			[
+				"ten",
+				"tenant_id"
+			],
+			[
+				"update",
+				"updatecollection_modified_tree"
+			],
+			[
+				"drop",
+				"dropdown-menu"
+			],
+			[
+				"ac",
+				"action\tAttr"
+			],
+			[
+				"upload",
+				"uploadStatus"
+			],
+			[
+				"colle",
+				"collectionList"
+			],
+			[
+				"object_field_file_",
+				"object_field_file_mime"
+			],
+			[
+				"onc",
+				"onclick\tAttr"
+			],
+			[
+				"fie",
+				"fields"
+			],
+			[
+				"dk-menu-",
+				"dk-menu-image"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"dk-",
+				"dk-menu-name"
+			],
+			[
+				"dk",
+				"dk-menu-image"
+			],
+			[
+				"table",
+				"table-cell"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"box-s",
+				"box-sizing"
+			],
+			[
+				"spa",
+				"space-between"
+			],
+			[
+				"align-",
+				"align-items"
+			],
+			[
+				"brea",
+				"breadcrumbArray"
+			],
+			[
+				"share",
+				"share_tenant_id"
+			],
+			[
+				"Collection",
+				"CollectionContents"
+			],
+			[
+				"Share",
+				"ShareResult"
+			],
+			[
+				"tenant_",
+				"tenant_id"
+			],
+			[
+				"tena",
+				"tenant_details"
+			],
+			[
+				"share_coll",
+				"share_collection_id"
+			],
+			[
+				"tenan",
+				"Tenants"
+			],
+			[
+				"Ten",
+				"Tenants"
+			],
+			[
+				"De",
+				"Details_row"
+			],
+			[
+				"user",
+				"user_permission"
+			],
+			[
+				"globals",
+				"globalstylesheet"
+			],
+			[
+				"Objec",
+				"ObjectID"
+			],
+			[
+				"share_link_",
+				"share_link_permission"
+			],
+			[
+				"tenant",
+				"tenant_detail"
+			],
+			[
+				"Tent",
+				"Tenant"
+			],
+			[
+				"collec",
+				"CollectionID"
+			],
+			[
+				"Sha",
+				"SharingLink"
+			],
+			[
+				"col-sm",
+				"col-sm-10"
+			],
+			[
+				"Collect",
+				"collectionObjects"
+			],
+			[
+				"Coll",
+				"CollectionChild"
+			],
+			[
+				"file",
+				"fileupload"
+			],
+			[
+				"copy",
+				"copyDestin"
+			],
+			[
+				"object_",
+				"object_props"
+			],
+			[
+				"recyc",
+				"recycleBinObjects"
+			],
+			[
+				"rec",
+				"recycleBinObjects"
+			],
+			[
+				"hard",
+				"hardDelete"
+			],
+			[
+				"recycl",
+				"recycleBinContents"
+			],
+			[
+				"recyclebin",
+				"recycleBinContents"
+			],
+			[
+				"fiel",
+				"fieldResult"
+			],
+			[
+				"Dakota",
+				"Dakota_Model"
+			],
+			[
+				"recycle",
+				"recycleCollection"
+			],
+			[
+				"collection",
+				"collection_id"
+			],
+			[
+				"json_",
+				"json_encode"
+			],
+			[
+				"dakota_move",
+				"dakota_move_target"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"collection_pare",
+				"collection_parent_id"
+			],
+			[
+				"collecion",
+				"collection_id"
+			],
+			[
+				"btn",
+				"btn-default"
+			],
+			[
+				"Colle",
+				"CollectionRoot"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 119.0,
+		"last_filter": "install",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"package control inste",
+				"Package Control: Install Package"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			]
+		],
+		"width": 540.0
+	},
+	"console":
+	{
+		"height": 107.0,
+		"history":
+		[
+			"console",
+			"clear console",
+			"cls",
+			"clear",
+			"cleR",
+			"fuck sake",
+			"ls",
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/login.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/global/error.cfm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/global/homepage.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/global/inspinia.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/global/widget.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/global/modal.htm",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/object_requests.php",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/user-object-copy.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/render_object_copy.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/render_view.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/resource/script/user_collections.js",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/user_object_modal_copy.htm",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/_collections.php",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/_objects.php",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/index.php",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/global/default.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/global/app.htm",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/_templates.php",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/user_collection_modal_move.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/user-folder-move.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/user_collection_modal_copy.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/user-folder-row.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/user-object-row.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/user-upload-modal.htm",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/model/audit.php",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/Dakota_Model.php",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/application_Controller.php",
+		"/Users/david.lodwig/Sites/Dakota/fb.php",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/sso.php",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/fb.php",
+		"/Users/david.lodwig/Sites/Dakota/config/sso_facebook.php",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/resource/css/signin.css",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/signup.htm",
+		"/Users/david.lodwig/Sites/Dakota/dakota.php",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/resource/Facebook/autoload.php",
+		"/Users/david.lodwig/Sites/Dakota/shared/dakota/view/widget/user-folder-move.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/resource/images/docupine-logo.svg",
+		"/Users/david.lodwig/Downloads/TED_reception_R2.0.9.S03_004-20180322/nuts_codes_2016.xsd",
+		"/Users/david.lodwig/Sites_Remote/Dakota/shared/docupine/view/local/login.htm",
+		"/Users/david.lodwig/Sites/OtherProjects/Docupine/index.html",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/resource/images/logo-docupine-default.svg",
+		"/Users/david.lodwig/Downloads/method-draw-image (2).svg",
+		"/Users/david.lodwig/Downloads/method-draw-image (1).svg",
+		"/Users/david.lodwig/Downloads/method-draw-image.svg",
+		"/private/var/folders/z9/87q7ff451zgf8tq41hl0lsb9x50ywx/T/com.microsoft.Outlook/Outlook Temp/docupine-logo-blk.svg",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/resource/images/folder-in-cloud-243x193.png",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/resource/images/Docupine_Header.png",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/resource/images/phones.png",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/resource/images/porcupine-angry.jpg",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/resource/css/style.css",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/resource/css/default.css",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/html/fancy.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/dashboard.htm",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/sharing.php",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/dashboard-audit.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/user-shared.htm",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/audit.php",
+		"/Users/david.lodwig/Sites/Dakota/shared/dakota/view/local/framework7/dashboard-audit.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/user_folder_modal_rename.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/user_object_modal_share.htm",
+		"/private/var/folders/z9/87q7ff451zgf8tq41hl0lsb9x50ywx/T/com.microsoft.Outlook/Outlook Temp/44d41dee-f7f0-45f9-a79b-7841742524b1.xml",
+		"/Users/david.lodwig/Downloads/jquery-validation-1.17.0/Gruntfile.js",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/template.php",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/model/shares.php",
+		"/Users/david.lodwig/Sites/Dakota/Dockerfile",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/model/tenant.php",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/app-side-menu.htm",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/model/objects.php",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/html/breadcrumb.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/user_object_modal.htm",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/model/collection.php",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/app-subheader.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/app-header.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/resource/css/cfstyle.css",
+		"/Users/david.lodwig/Sites/dakota.env",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/html/whoami.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/user-header-row.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/user-folder-view.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/user_object_modal_rename.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/dakota/view/widget/user-object-row.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/resource/script/user_upload.js",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/user_collection_header_render.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/resource/script/default.js",
+		"/Users/david.lodwig/Pictures/quickquote.svg",
+		"/Users/david.lodwig/Sites/iSource/trunk/images/logos/quickquote.svg",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/local/user_object_modal_edit.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/user-folder-rename.htm",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/user-object-rename.htm",
+		"/Users/david.lodwig/Sites/Dakota/build/php_upload.ini",
+		"/Users/david.lodwig/Sites/Dakota/.ebextensions/enviroment.config",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/_utilities.php",
+		"/Users/david.lodwig/Sites/Dakota/info.php",
+		"/Users/david.lodwig/Sites/Dakota/build/php_errors.ini",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/account.php",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/object_requests.php.orig",
+		"/Users/david.lodwig/Sites/Dakota/shared/docupine/view/widget/html/profile-image.htm",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/system/aws/README.md",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/system/array.php",
+		"/Users/david.lodwig/Sites_Remote/Dakota/shared/docupine/view/widget/app-side-menu.htm",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/builder.php",
+		"/Users/david.lodwig/.ssh/known_hosts",
+		"/Users/david.lodwig/Sites/Project Files/dakota.env",
+		"/Users/david.lodwig/Database Dumps/Dakota_12_03_18.sql",
+		"/Users/david.lodwig/.bash_profile",
+		"/Users/david.lodwig/Sites/Dakota/build/000-default.conf",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/install.php",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/_api_box.php",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/controller/template_goodchild.php",
+		"/Users/david.lodwig/Sites/Dakota/shared/default/view/local/homepage.htm",
+		"/Users/david.lodwig/Sites/Dakota/signin.php",
+		"/Users/david.lodwig/Sites/Dakota/cf.php",
+		"/Users/david.lodwig/Sites/Dakota/.ebextensions/build.config",
+		"/Users/david.lodwig/Sites/Dakota/build/config.ini",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/model/tenantbundles.php",
+		"/Users/david.lodwig/Sites/Dakota/site/dakota/model/bundlefeatures.php",
+		"/Users/david.lodwig/Downloads/3OwxgpE/.ebextensions/enviromentvariables.config",
+		"/Users/david.lodwig/Sites/Dakota/.ebextensions/enviromentvariables.config",
+		"/Users/david.lodwig/Sites/Dakota/.ebextensions/application.config",
+		"/Users/david.lodwig/Sites/Ivy/Ivy_Database.php",
+		"/Users/david.lodwig/Sites/Ivy/Ivy_Model.php",
+		"/Users/david.lodwig/Sites/Ivy/Ivy_Controller.php",
+		"/Users/david.lodwig/Sites/Ivy/Ivy_Dictionary.php",
+		"/Users/david.lodwig/Sites/Ivy/Ivy_Router.php",
+		"/Users/david.lodwig/Sites/Ivy/Ivy_Error.php",
+		"/Users/david.lodwig/Sites/Ivy/config/config.ini",
+		"/Users/david.lodwig/Sites/Ivy/Ivy_Registry.php",
+		"/Users/david.lodwig/Sites/Ivy/controller/install.php",
+		"/Users/david.lodwig/Sites/Ivy/controller/ivy_admin.php"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 101.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "Ivy_Router.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Sites/Project Files/dakota.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 370.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

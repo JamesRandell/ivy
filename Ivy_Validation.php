@@ -213,24 +213,20 @@ public $error = false;
 			case 'char'	:
 			
 				break;
+
 			case 'varchar'	:
-					return array('value'=>trim($value));
-				break;
-			case 'var'	:
-					return array('value'=>trim($value));
-				break;
+			case 'nvarchar' :
+			case 'var'		:
+			case 'longtext' :
+				
+				return array('value'=>trim($value));
+				break ;
+
 			case 'integer'	:
-				if ($value == '0') {
-					return array('value'=>NULL);
-				}
-				if (isset($value[0]) && !is_numeric($value)) {
-					return array('error'=>"A numeric value is required",
-									'value'=>$value);
-				} else {
-					return array('value'=>$value);
-				}
-				break;
-			case 'int'	:
+			case 'tinyint' 	:
+			case 'bigint'	:
+			case 'int'		:
+				
 				if ($value == 0) {
 					return array('value'=>NULL);
 				}
@@ -241,18 +237,9 @@ public $error = false;
 					return array('value'=>$value);
 				}
 				break;
-				// this breaks auto adding record ID's into fields
-				/**if ($value == '0') {
-					return array('value'=>NULL);
-				}
-				if (is_numeric($value) === false) {
-					return array('error'=>"A numeric value is required",
-									'value'=>$value);
-				} else {
-					return array('value'=>$value);
-				}
-				break;**/
+
 			case 'decimal'	:
+				
 				if ($value == 0) {
 					return array('value'=>NULL);
 				}
@@ -263,7 +250,10 @@ public $error = false;
 					return array('value'=>$value);
 				}
 				break;
+			
+			case 'double'	:
 			case 'float'	:
+				
 				if ($value == 0) {
 					return array('value'=>NULL);
 				}
@@ -274,7 +264,9 @@ public $error = false;
 					return array('value'=>$value);
 				}
 				break;
+			
 			case 'unix'	:
+				
 				if (strlen($value) == 0) {
 					return array('value'=>$value);
 				}
@@ -290,7 +282,23 @@ public $error = false;
 
 				return array('value'=>strtotime($value));
 				break;
+			
+			case 'date'		:
+
+				if (($timestamp = strtotime($value)) === false) {
+					
+					return array('error'=>"The value can't be converted to a date",
+									'value'=>$value);
+				} else {
+					$date = date_create($value);
+					
+					return array('value'=>date_format($date, 'Y-m-d'));
+				}
+				
+				break;
+
 			case 'datetime'	:
+				
 				if (($timestamp = strtotime($value)) === false) {
 					
 					return array('error'=>"The value can't be converted to a date",

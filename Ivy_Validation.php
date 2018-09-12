@@ -219,6 +219,13 @@ public $error = false;
 			case 'var'		:
 			case 'longtext' :
 				
+				// Added some filtering to remove HTML entities
+				// and special chars from text fields.
+				 $value = htmlentities($value , ENT_COMPAT, ini_get("default_charset") , FALSE );
+                 $value = htmlspecialchars($value , ENT_COMPAT, ini_get("default_charset") , FALSE );
+                 $value = str_replace("(","&#40;",$value);
+                 $value = str_replace(")","&#41;",$value);
+
 				return array('value'=>trim($value));
 				break ;
 

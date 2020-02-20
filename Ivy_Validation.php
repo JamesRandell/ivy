@@ -100,8 +100,9 @@ public $error = false;
 		// Loops through the fields
 		
 		$result = array ();
-
+//print_pre($dataArray);
 		foreach ($dataArray as $field => $value) {
+			
 			if (isset($this->schema['fieldSpec'][$field]) && $field[0] != '_') {
 				$dataArray[$field] = str_replace (  "'", '&#039;', $dataArray[$field] );
       			#$dataArray[$field] = str_replace (  '"', '&quot;',$dataArray[$field] );
@@ -160,8 +161,6 @@ public $error = false;
 							
 								$this->error[] = $ttt;
 
-								#echo $field . $returnedValue['error'];
-
 								#unset($result[$field]);# = $dataArray[$field];
 						} else if (isset($returnedValue['value'])) {
 							// ok then a value?
@@ -199,7 +198,7 @@ public $error = false;
 				}
 			}
 		}
-
+//print_pre($this->error);
 		return $result;
 	}
 	
@@ -213,27 +212,24 @@ public $error = false;
 			case 'char'	:
 			
 				break;
-
 			case 'varchar'	:
-			case 'nvarchar' :
-			case 'var'		:
-			case 'longtext' :
-				
-				// Added some filtering to remove HTML entities
-				// and special chars from text fields.
-				 $value = htmlentities($value , ENT_COMPAT, ini_get("default_charset") , FALSE );
-                 $value = htmlspecialchars($value , ENT_COMPAT, ini_get("default_charset") , FALSE );
-                 $value = str_replace("(","&#40;",$value);
-                 $value = str_replace(")","&#41;",$value);
-
-				return array('value'=>trim($value));
-				break ;
-
+					return array('value'=>trim($value));
+				break;
+			case 'var'	:
+					return array('value'=>trim($value));
+				break;
 			case 'integer'	:
-			case 'tinyint' 	:
-			case 'bigint'	:
-			case 'int'		:
-				
+				if ($value == '0') {
+					return array('value'=>NULL);
+				}
+				if (isset($value[0]) && !is_numeric($value)) {
+					return array('error'=>"A numeric value is required",
+									'value'=>$value);
+				} else {
+					return array('value'=>$value);
+				}
+				break;
+			case 'int'	:
 				if ($value == 0) {
 					return array('value'=>NULL);
 				}
@@ -244,9 +240,18 @@ public $error = false;
 					return array('value'=>$value);
 				}
 				break;
-
+				// this breaks auto adding record ID's into fields
+				/**if ($value == '0') {
+					return array('value'=>NULL);
+				}
+				if (is_numeric($value) === false) {
+					return array('error'=>"A numeric value is required",
+									'value'=>$value);
+				} else {
+					return array('value'=>$value);
+				}
+				break;**/
 			case 'decimal'	:
-				
 				if ($value == 0) {
 					return array('value'=>NULL);
 				}
@@ -257,10 +262,7 @@ public $error = false;
 					return array('value'=>$value);
 				}
 				break;
-			
-			case 'double'	:
 			case 'float'	:
-				
 				if ($value == 0) {
 					return array('value'=>NULL);
 				}
@@ -271,9 +273,7 @@ public $error = false;
 					return array('value'=>$value);
 				}
 				break;
-			
 			case 'unix'	:
-				
 				if (strlen($value) == 0) {
 					return array('value'=>$value);
 				}
@@ -289,23 +289,7 @@ public $error = false;
 
 				return array('value'=>strtotime($value));
 				break;
-			
-			case 'date'		:
-
-				if (($timestamp = strtotime($value)) === false) {
-					
-					return array('error'=>"The value can't be converted to a date",
-									'value'=>$value);
-				} else {
-					$date = date_create($value);
-					
-					return array('value'=>date_format($date, 'Y-m-d'));
-				}
-				
-				break;
-
 			case 'datetime'	:
-				
 				if (($timestamp = strtotime($value)) === false) {
 					
 					return array('error'=>"The value can't be converted to a date",
@@ -681,6 +665,39 @@ public $error = false;
 		
 	}
 	
+	
+	/**
+	 * ACG to run checks to make sure the user can update the datasource
+	 *
+	 * @param	int		$option		Integer with a minimim size limit
+	 * @param	string	$value		The value to be checked
+	 * @result	array
+	 */
+	private function errorCheck_acg ($option, $value) {
+		
+		if (empty(array_intersect($this->session->acg, $option)) === true) {
+			return array('value'=>$value,
+				'error'=>"You don't have the permissions to update this field.");
+		}
+	}
+
+/**
+	 * DCG to run checks to make sure the user can update the datasource
+	 *
+	 * @param	int		$option		Integer with a minimim size limit
+	 * @param	string	$value		The value to be checked
+	 * @result	array
+	 */
+	private function errorCheck_dcg ($option, $value) {
+		
+		if (empty(array_intersect($this->session->acg, $option)) !== true) {
+			return array('value'=>$value,
+				'error'=>"You don't have the permissions to update this field.");
+		}
+	}
+
+
+
 	/*
 	 * Looks at the join attribute to see if it's members exists.
 	 *

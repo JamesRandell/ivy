@@ -10,8 +10,6 @@
  * @version 2.0
  * @package Template
  * @updated	23rd April, 2012
- *
- * 
  * 
  */
 class Ivy_View {
@@ -1115,7 +1113,7 @@ public function addData ($data, $name = 'default') {
 
 		if (isset($this->data['system']['script'])) {
 			
-			$cachedScript = Ivy_File::select(SITEPATH . '/site/' . SITE . '/resource/cache/script');
+			$cachedScript = Ivy_File::select('site/' . SITE . '/resource/cache/script');
 						
 			$js = '';
 			foreach ($this->data['system']['script'] as $key => $value) {
@@ -1177,11 +1175,7 @@ public function addData ($data, $name = 'default') {
 			
 			} else if (is_readable('shared/' . THEME . '/view/local/' . $template . '.htm')) {
 
-				$settingsArray['localPath'] = 'shared/' . THEME . '/view/local/';
-
-			} else if (is_readable( SITEPATH . '/shared/' . THEME . '/view/local/' . $template . '.htm')) {
-
-				$settingsArray['localPath'] = SITEPATH . '/shared/' . THEME . '/view/local/';					
+				$settingsArray['localPath'] = 'shared/' . THEME . '/view/local/';				
 			
 			} else if (is_readable($template . '.htm')) {
 
@@ -1218,10 +1212,6 @@ public function addData ($data, $name = 'default') {
 			} else if (is_readable('shared/' . THEME . '/view/global/' . $globalTemplate . '.htm')) {
 				
 				$settingsArray['globalPath'] = 'shared/' . THEME . '/view/global/';
-
-			} else if ( is_readable (  SITEPATH . '/shared/' . THEME . '/view/global/' . $globalTemplate . '.htm' ) ) {
-				
-				$settingsArray['globalPath'] =  SITEPATH . '/shared/' . THEME . '/view/global/';
 			
 			} else {				
 				
@@ -1392,78 +1382,32 @@ public function addData ($data, $name = 'default') {
 
 	
 	
-	private function encrypt_field_name ($fieldName) {
-		return openssl_encrypt($fieldName, 'AES-256-CBC', 'supersecretkey');
-	}
+private function encrypt_field_name ($fieldName) {
+	return openssl_encrypt($fieldName, 'AES-256-CBC', 'supersecretkey');
+}
 
-	private function decrypt_field_name ($fieldName) {
-		return openssl_decrypt($fieldName, 'AES-256-CBC', 'supersecretkey');
-	}
+private function decrypt_field_name ($fieldName) {
+	return openssl_decrypt($fieldName, 'AES-256-CBC', 'supersecretkey');
+}
 
-	private function language () {
-		$encoding = 'UTF-8';
+private function language () {
 
-		if ($this->registry->selectSession('locale')) {
-			$locale = $this->registry->selectSession('locale');
-		} else {
-			$locale = 'en_GB';
-			$this->registry->insertSession('locale', $locale);
-		}
-	
-		putenv("LANG=" . $locale); 
-		setlocale(LC_ALL, $locale);
+	/*
+	 * no language has been specified (well it has but it's 'default')
+	 */
+	if ($this->data['system']['stat']['client']['language'] == 'default') {
+		
 
-		$file = SITE;
-
-		// path to the .MO file that we should monitor
-		$filename = SITEPATH . '/site/' . SITE . '/resource/locale/' . $locale . '/LC_MESSAGES/' . $file . '.mo';
-		$mtime = filemtime($filename); // check its modification time
-
-		/**
-		 * Handle the cache location parameter in the config file, this is only
-		 * really useful if you need to move the cache to a path outside the webroot for 
-		 * security or build purposes.
-		 * 05/06/2018	David J. Lodwig		<david.lodwig@davelodwig.co.uk>
+		/*
+		 * do stuff with $this->data
 		 */
-		
-		$pathCheck = $this->registry->selectSystem('config') ;
-		
-		if ( isset ( $pathCheck['cache']['root'] ) ) {
+		// loop through phrases
+		// for each one, add to $this->data['phrase'] (can do as an entire array)
+		$this->data['phrase']['test'] = 'German phrase';
+	}
 
-			$CacheRoot = $pathCheck['cache']['root'] ;
+}
 
-		} else {
-
-			$CacheRoot = SITEPATH ;
-
-		}
-
-		$filename_new = $CacheRoot . '/site/' . SITE . '/resource/cache/locale/'. $locale . '/LC_MESSAGES/' . $file . '_' . $mtime . '.mo'; 
-
-		if ( !file_exists( $filename_new ) ) { 
-			
-			// check if we have created it before
-			// if not, create it now, by copying the original
-		
-			if (!file_exists ( $CacheRoot . '/site/' . SITE . '/resource/cache/locale/'. $locale . '/LC_MESSAGES/')) {
-    				
-    			mkdir ( $CacheRoot . '/site/' . SITE . '/resource/cache/locale/'. $locale . '/LC_MESSAGES/', 0777, true);
-			
-			}
-
- 			copy ( $filename,$filename_new ) ;
- 		}
- 		
- 		// compute the new domain name
- 		$domain_new = rtrim($file . '_' . $mtime);
-
-		// bind it
-		bindtextdomain($domain_new, $CacheRoot . '/site/' . SITE . '/resource/cache/locale');
- 		bind_textdomain_codeset($domain_new, $encoding);
-
- 		// then activate it
- 		textdomain($domain_new);
-	}	
 
 }
 

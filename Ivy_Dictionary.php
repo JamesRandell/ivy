@@ -223,8 +223,13 @@ class Ivy_Dictionary {
 				if (isset($array['fieldSpec'][$field]['options']['where'])) {
 					$where = ' WHERE ' . $array['fieldSpec'][$field]['options']['where'];
 				}
+				
+				$order = $newTable . '.' . $key . ' ASC';
+				if (isset($array['fieldSpec'][$field]['options']['order'])) {
+					$order = $array['fieldSpec'][$field]['options']['order'];
+				}
 //echo 'SELECT ' . $newTable . '.' . $key . ',' . $value . ' FROM ' . $newTable . $where . ' ORDER BY ' . $newTable . '.' . $key . ' ASC';
-				$tempResult = $this->db->query('SELECT ' . $newTable . '.' . $key . ',' . $value . ' FROM ' . $newTable . $where . ' ORDER BY ' . $newTable . '.' . $key . ' ASC');
+				$tempResult = $this->db->query('SELECT ' . $newTable . '.' . $key . ',' . $value . ' FROM ' . $newTable . $where . ' ORDER BY ' . $order);
 				#$result = $tempResult;
 
 				foreach($tempResult as $row => $data) {
@@ -268,6 +273,21 @@ class Ivy_Dictionary {
 				}
 			}
 
+
+			/* 18/03/18 JR
+			 * Added ACG and DCG to the model
+			 */
+			if (isset($array['fieldSpec'][$field]['back']['dcg'])) {
+				$dcg = $array['fieldSpec'][$field]['back']['dcg'];
+				//print_pre($session['acg']);
+				
+				if (empty(array_intersect($session['acg'], $dcg)) !== true) {
+					$result = 'bahblah';
+				}
+			
+			}
+			
+			
 			if (isset($_POST[$field])) {
 				#$t['data'][0][$field] = $_POST[$field];
 			}	

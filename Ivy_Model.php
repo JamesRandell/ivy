@@ -627,14 +627,9 @@ public $count = 0;
 
 
 		$dataArray = $this->_fixFieldNames($dataArray);
-
-	
 		$dataArray = $validation->check($dataArray);
+
 		$this->data = $dataArray;
-		
-		
-		
-		#print_pre($dataArray);
 
 		#$schema = $this->registry->selectData($this->id);
 
@@ -643,7 +638,6 @@ public $count = 0;
 		$a = $this->schema;
 		$a['data'][0] = $dataArray;
 
-		#print_pre($a);
 		if ($validation->error !== false) {
 			return false;
 		}
@@ -697,9 +691,8 @@ public $count = 0;
 
 
 	
-		if (isset($_GET['debug'])) {
-			echo $query.'<br><br><br>';
-		} else {
+		
+		
 			$result = $this->db->query($query);
 			
 			if ($result !== FALSE) {
@@ -716,7 +709,7 @@ public $count = 0;
 				$registryCounter = $registry->insertData($this->schema);
 				return TRUE;
 			}
-		}
+		
 		return FALSE;
 
 	}

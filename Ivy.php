@@ -34,12 +34,8 @@ unset($site);
 
 /**
  * The full path of the orininal site location
- * DJL 05/03/18 - So sitepath can be defined in the app loader.
  */
-if ( !defined ( 'SITEPATH' ) )
-{
-	define ( 'SITEPATH', dirname ( $_SERVER['SCRIPT_FILENAME'] ) ) ;
-}
+define('SITEPATH', dirname($_SERVER['SCRIPT_FILENAME']));
 
 /**
  * Start the timer
@@ -80,27 +76,25 @@ function timerSelect () {
 	return $diff;
 }
 
-# DJL 27/02/18
-# Patch added to cope with being on linux servers
-spl_autoload_register ( function ( $className ) 
-{
-	$directories = array 
-	(
+spl_autoload_register('myAutoloader');
+
+function myAutoloader($className) {
+
+    $directories = array (
 		IVYPATH . '/',
 		'site/' . SITE . '/controller/',
 		IVYPATH . '/templating/',
-	) ;
+	);
 
-	foreach ($directories as $directory) 
-	{
-		if (is_file($directory . $className . '.php')) 
-		{
-			include $directory . $className . '.php';
+	foreach ($directories as $directory) {
+		if (is_file($directory . $className . '.php')) {
+			require_once $directory . $className . '.php';
 			return;
 		}
 	}
-} ) ;
 
+
+}
 /*
 function __autoload($class_name) {
 	$directories = array (

@@ -112,24 +112,8 @@ public $output = true;
 		$globalTemplateCache = str_replace('/', '-slash-', $globalTemplate);
 		$localTemplateCache = str_replace('/', '-slash-', $localTemplate);
 		
-		/**
-		 * Handle the cache location parameter in the config file, this is only
-		 * really useful if you need to move the cache to a path outside the webroot for 
-		 * security or build purposes.
-		 * 05/06/2018	David J. Lodwig		<david.lodwig@davelodwig.co.uk>
-		 */
-		
-		if ( isset ( $this->config['cache']['root'] ) ) { 
 
-			$CacheRoot = $this->config['cache']['root'] ;
-
-		} else {
-
-			$CacheRoot = SITEPATH ;
-		}
-		
-
-		if (!file_exists( $CacheRoot . '/site/' . SITE . '/resource/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm') || $config['output']['cache'] == 0) {
+		if (!file_exists(SITEPATH . '/site/' . SITE . '/resource/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm') || $config['output']['cache'] == 0) {
 
 			$string = $this->getFile($this->globalPath . $globalTemplate . '.htm');
 
@@ -141,11 +125,11 @@ public $output = true;
 			$var = str_replace("\xEF\xBB\xBF",'',$var);
 			
 			if (is_dir(SITEPATH . '/site/' . SITE)) {
-				file_put_contents($CacheRoot . '/site/' . SITE . '/resource/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm', $var);
-				return $this->build($CacheRoot . '/site/' . SITE . '/resource/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm');
+				file_put_contents(SITEPATH . '/site/' . SITE . '/resource/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm', $var);
+				return $this->build(SITEPATH . '/site/' . SITE . '/resource/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm');
 			} else {
-				file_put_contents( $CacheRoot . '/shared/' . THEME . '/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm', $var);
-				return $this->build( $CacheRoot . '/shared/' . THEME . '/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm');
+				file_put_contents('shared/' . THEME . '/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm', $var);
+				return $this->build('shared/' . THEME . '/cache/template/' . $globalTemplateCache . '-'. $localTemplateCache . '.htm');
 			}
 		}
 	}
@@ -159,11 +143,11 @@ private function build ($template) {
 	
 	if ($this->output === true) {
 		error_reporting(E_ALL ^ E_NOTICE);
-		include_once $template;
+		include $template;
 		error_reporting(E_ALL);
 	} else {
 		ob_start();
-		include_once $template;
+		include $template;
 		$html = ob_get_contents();
 		ob_end_clean();
 		return $html;
@@ -431,12 +415,12 @@ private function build ($template) {
 							$tempPath = SITEPATH . '/site/' . SITE . '/resource/template/widget/' . $widget;					
 						} else if (is_readable(SITEPATH . '/site/' . SITE . '/view/widget/' . $widget)) {						
 								   $tempPath = SITEPATH . '/site/' . SITE . '/view/widget/' . $widget;					
-						} else if (is_readable(SITEPATH . '/extension/' . EXTENSION . '/view/widget/' . $widget)) {						
-								   $tempPath = SITEPATH . '/extension/' . EXTENSION . '/view/widget/' . $widget;					
-						} else if (is_readable(SITEPATH . '/shared/' . THEME . '/template/widget/' . $widget)) {						
-							$tempPath = SITEPATH . '/shared/' . THEME . '/template/widget/' . $widget;					
+						} else if (is_readable('extension/' . EXTENSION . '/view/widget/' . $widget)) {						
+								   $tempPath = 'extension/' . EXTENSION . '/view/widget/' . $widget;					
+						} else if (is_readable('shared/' . THEME . '/template/widget/' . $widget)) {						
+							$tempPath = 'shared/' . THEME . '/template/widget/' . $widget;					
 						} else {						
-							$tempPath = SITEPATH . '/shared/' . THEME . '/template/widget/' . $widget;						
+							$tempPath = 'shared/' . THEME . '/template/widget/' . $widget;						
 						}
 					}
 					$result = $this->processInclude($tempPath);

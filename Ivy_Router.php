@@ -53,23 +53,10 @@ class Ivy_Router {
 		
 		$this->getController();
 		
-		/* 24-12-2018 DJL */
-		/* Have added the parameter IVYCONFIG to allow the custom setting of the location
-		of the config file so it can be included in the commit, works best when combined with
-		the enviroment variables below */
-
-		if ( defined ( 'IVYCONFIG' ) ) {
-
-			$parser = parse_ini_file ( IVYCONFIG ) ;			
-
-		} else {
-
-			$parser = parse_ini_file(IVYPATH . '/config/config.ini');
-
-		}
+		$parser = parse_ini_file(IVYPATH . '/config/config.ini');
 
 		if ($parser === false) {
-			die ( 'Unable to read config file' ) ;
+			die('Unable to read config file: Ivy/config/config.ini');
 		}
 		
 		

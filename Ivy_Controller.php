@@ -430,7 +430,6 @@ static function load () {
  */
 private function _permissionLoop ($array) {
 
-
 	foreach ($array as $key => $data) {
 	
 		(bool) $exitLoop = false;
@@ -439,11 +438,11 @@ private function _permissionLoop ($array) {
 		(bool) $childrenLoop = true;
 		
 		if (!isset($data['_acg'])) {
-			$array[$key]['_acg'] = array();
+			$array[$key]['_acg'] = $data[$key] = array();
 		}
 		
 		if (!isset($data['_dcg'])) {
-			$array[$key]['_dcg'] = array();
+			$array[$key]['_dcg'] = $data[$key] = array();
 		}
 		
 		/*if (in_array($this->session->autenticationAccess, $data['_acg']) === 1 && $this->session->authenticate() === 0) {
@@ -461,6 +460,10 @@ private function _permissionLoop ($array) {
 		}
 
 		if ($this->session->authenticate() === 1) {
+//echo $data['action'];
+//print_pre($data['_acg']);
+//print_pre($this->session->acg);
+//echo '------------------------------------------------';
 
 			if (isset($data['_acg']) && empty(array_intersect($this->session->acg, $data['_acg'])) === true) {
 				unset($array[$key]);

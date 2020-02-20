@@ -69,7 +69,7 @@ public function __construct ($result = null) {
 	/**
 	 * Load the PHP Mailer autoload class
 	 */
-	require IVYPATH . '/system/PHPMailer/PHPMailerAutoload.php';
+	require_once IVYPATH . '/system/PHPMailer/PHPMailerAutoload.php';
 
 	$this->mail = new PHPMailer; 
 	
@@ -122,7 +122,18 @@ public function recipient ($email, $name) {
 	$this->mail->AddAddress(htmlspecialchars_decode($email), $name);
 }
 
-	
+public function file ($url, $name, $encoding, $type) {
+	$this->mail->addAttachment($url, $name, $encoding, $type);
+}
+public function attatchment ($url, $name, $encoding, $type) {
+	$this->mail->addAttachment($url, $name, $encoding, $type);
+}
+
+public function string ($string, $name, $encoding, $type) {
+	$this->mail->addStringAttachment($string, $name, $encoding, $type);
+}
+
+
 /**
  * sends the e-mail along with the header
  * 
@@ -143,7 +154,7 @@ public function send () {
 	if (strlen($this->stylesheet) > 0) {
 		$this->content = $this->mail->Body = $this->mail->AltBody = $this->view->build($this->stylesheet, $this->globalstylesheet);
 	}
-
+	
 	//send the message, check for errors 
 	if (!$this->mail->send()) { 
 		echo "Mailer Error: " . $this->mail->ErrorInfo; 

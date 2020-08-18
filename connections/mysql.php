@@ -99,7 +99,8 @@ class MySQL {
 		(array) $result = array ();
 
 		// mysql doesn't like the + sign for concat, so change it for double pipe
-		$sql = str_replace('+', '||', $sql);
+		// Now handled with PIPES_CONCAT set in the connection string, so commented out (JR, 11/01/2018)
+		//$sql = str_replace('+', '||', $sql);
 		
 		//echo $sql.'              <br><br><br>';
 		
@@ -134,7 +135,7 @@ class MySQL {
 			//array_unshift($params, $types);
 		}
 
-#echo $sql .'<br>';
+//echo $sql .'<br><br><br>';
 
 
 		//$query = $this->connection->stmt_init();
@@ -151,7 +152,7 @@ class MySQL {
 
 			$stmt->execute(); 
 			$meta = $stmt->result_metadata();
-
+//print_pre($bind_names);
 			if ($meta !== false) {
 				
 				/**

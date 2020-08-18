@@ -267,7 +267,7 @@ private function _cLoad() {
 	return $this->title;
 }
 
-public function redirect($action = ACTION, $controller = CONTROLLER) {
+public function redirect($action = ACTION, $controller = CONTROLLER, $die = true) {
 
 	if (!$action) {
 		//$action = ACTION;
@@ -351,8 +351,11 @@ public function redirect($action = ACTION, $controller = CONTROLLER) {
 	}
 	//trigger_error('HTTP Header: Redirect did not work');
 
-	return;
-	die();
+	if ($die == true) {
+		return;
+		die();
+	}
+	
 }
 
 /**
@@ -461,9 +464,11 @@ private function _permissionLoop ($array) {
 
 		if ($this->session->authenticate() === 1) {
 //echo $data['action'];
+//echo 0;
 //print_pre($data['_acg']);
+//echo 1;
 //print_pre($this->session->acg);
-//echo '------------------------------------------------';
+//echo '------------------------------------------------<br>';
 
 			if (isset($data['_acg']) && empty(array_intersect($this->session->acg, $data['_acg'])) === true) {
 				unset($array[$key]);

@@ -216,7 +216,7 @@ public $count = 0;
 
 			$query .= " WHERE ";
 			$parameterLength = count($this->db->parameter) -1;
-
+//print_pre($this->db->parameter);
 			// sorts the where parameters by there level of paranthesis
 			usort($this->db->parameter, function($a, $b) {
 				return $a['level'] <=> $b['level'];
@@ -247,7 +247,7 @@ public $count = 0;
 					$value['field'] = (strpos($value['field'], '.') === false) ? $value['field'] : str_replace('.', '"."', $value['field']);
 
 					/**
-					 * we now check is there the operator is IS so we can replace the parameters with NULL/NOT NULL
+					 * we now check if there the operator is IS so we can replace the parameters with NULL/NOT NULL
 					 */
 					if ($value['operator'] == 'IS' OR $value['operator'] == 'IS NOT') {
 						$where .= '"' . $value['field'] . '" ' . $value['operator'] . ' ' . $value['value'];
@@ -393,6 +393,13 @@ public $count = 0;
 			}
 		}
 
+		/*
+		 * Quick fix because the $logic parameter if null wasn't being assigned the default value of AND
+		 */
+		if (is_null($logic)) {
+			$logic = 'AND';
+		}
+		
 		$e = $this->db->parameter[] = array (
 									'table'		=>	$this->schema['tableSpec']['name'],
 									'field'		=>	$field,
@@ -415,20 +422,28 @@ public $count = 0;
 		
 		if (!array_key_exists($field, $this->schema['fieldSpec'])) {
 
+			$temp_field = $field;
 			$field = $this->schema['tableSpec']['name'] . '.' . $field;
 
 			if (!array_key_exists($field, $this->schema['fieldSpec'])) {
 				$field = '';
+			} else {
+				/* 
+					minor hack. This is to wrap both the table name and the column name in ANSI92 double quotes instead of the whole string. 
+					Sadly though this format doesn't match our fieldSpec, so apply it after we compare it
+				*/
+				$field = '"' . $this->schema['tableSpec']['name'] . '"."' . $temp_field . '"';
 			}
 		}
 		
 		if (!empty($field)) {
+			$direction = trim($direction);
 			switch ($direction) {
 				case 'DESC'	:	$direction = 'DESC';
 								break;
 				default 	:	$direction = 'ASC';
 			}
-			$this->order = '"' . $field . '" ' . $direction;
+			$this->order = $field . ' ' . $direction;
 		}
 
 		return $this;

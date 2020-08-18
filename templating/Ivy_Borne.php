@@ -143,7 +143,15 @@ private function build ($template) {
 	
 	if ($this->output === true) {
 		error_reporting(E_ALL ^ E_NOTICE);
-		include $template;
+		
+		
+		try {
+			include $template;
+		} catch (Error $e) {
+			echo $this->localTemplate;
+			print_pre($e);
+			echo "Error caught: " . $e->getMessage();
+		}
 		error_reporting(E_ALL);
 	} else {
 		ob_start();

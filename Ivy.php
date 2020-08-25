@@ -35,7 +35,10 @@ unset($site);
 /**
  * The full path of the orininal site location
  */
-define('SITEPATH', dirname($_SERVER['SCRIPT_FILENAME']));
+if (!defined('SITEPATH')) {
+	define('SITEPATH', dirname($_SERVER['SCRIPT_FILENAME']));
+}
+
 
 /**
  * Start the timer
@@ -52,7 +55,7 @@ define('E_USER_SLOWSCRIPT', 1048);
  * where are these Ivy base files?
  */
 if (!defined('IVYPATH')) {
-	define('IVYPATH', $_SERVER['DOCUMENT_ROOT'] . '/Ivy');
+	define('IVYPATH', $_SERVER['DOCUMENT_ROOT'] . '/ivy');
 }
 
 /**
@@ -79,11 +82,12 @@ function timerSelect () {
 spl_autoload_register('myAutoloader');
 
 function myAutoloader($className) {
-
+	
     $directories = array (
 		IVYPATH . '/',
 		'site/' . SITE . '/controller/',
-		IVYPATH . '/templating/',
+		SITEPATH . '/controller/',
+		IVYPATH . '/templating/'
 	);
 
 	foreach ($directories as $directory) {
@@ -95,6 +99,9 @@ function myAutoloader($className) {
 
 
 }
+//echo IVYPATH.'<br>';
+//echo SITEPATH.'<br>';
+
 /*
 function __autoload($class_name) {
 	$directories = array (

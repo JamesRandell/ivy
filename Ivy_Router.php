@@ -113,6 +113,10 @@ class Ivy_Router {
 			
 			$this->path = SITEPATH . '/site/' . SITE . '/controller';
 		
+		} else if (is_readable(SITEPATH . '/controller/' . $this->controller . '.php')) {
+			
+			$this->path = SITEPATH . '/controller';
+		
 		} else if (is_readable(SITEPATH . '/core/extension/' . $this->controller . '/controller/' . $this->controller . '.php')) {
 			
 			$this->path = SITEPATH . '/core/extension/' . $this->controller . '/controller';
@@ -120,7 +124,7 @@ class Ivy_Router {
 		} else {
 			
 			header("HTTP/1.0 404 Not Found");
-			echo 'controller/' . $this->controller . '.php' . '<br />';
+			echo SITEPATH.'//controller/' . $this->controller . '.php' . '<br />';
 			die ('404 Not Found');
 			
 		}

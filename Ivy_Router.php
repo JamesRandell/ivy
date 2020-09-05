@@ -52,7 +52,7 @@ class Ivy_Router {
 		$this->registry = Ivy_Registry::getInstance();
 		
 		$this->getController();
-		
+
 		$parser = parse_ini_file(IVYPATH . '/config/config.ini');
 
 		if ($parser === false) {

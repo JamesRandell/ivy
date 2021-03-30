@@ -101,16 +101,18 @@ class Ivy_Error {
 	 */
 	public function insert ($data)
 	{
-
 		$registry = Ivy_Registry::getInstance();
-		if (!is_array($data)) {
-			$registry->insertError(array('description'=>$data));
-		} else {
-			$registry->insertError($data);
-		}
+		$registry->insertError($data);
 	}
 	
-	
+	public function select ()
+	{
+		$registry = Ivy_Registry::getInstance();
+		
+		return $registry->selectError();
+	}
+
+
 	/**
 	 * Gets current mode (default, error etc).
 	 *

@@ -38,12 +38,18 @@ class Ivy_Router {
 	
 	private $action = 'index';
 	
+	private $pathIvy = __DIR__;
+
+
 	function __construct () {
 		
 		(array) $parserArray = array ();
 		(array) $array = array ();
 		(int) $ivyadmin = 0;
 		
+		$this->pathSite = $_SERVER['DOCUMENT_ROOT'];
+
+
 		$parserArray['db']['type'] = 'ini';
 		$parserArray['output']['type'] = 'borne';
 		$parserArray['output']['theme'] = 'default';
@@ -52,6 +58,22 @@ class Ivy_Router {
 		$this->registry = Ivy_Registry::getInstance();
 		
 		$this->getController();
+
+
+		print_pre($_ENV);
+
+		$file = new Ivy_File();
+		$t = $file->load(IVYPATH . '/config/config.ini');
+		if ($t === FALSE) {
+			$readable = $file->readable(IVYPATH . '/config');
+			print_pre($readable);
+		}
+
+		
+		print_pre($file->error);
+		print_pre($t);
+		
+echo IVYPATH . '/config/config.ini';
 
 		$parser = parse_ini_file(IVYPATH . '/config/config.ini');
 

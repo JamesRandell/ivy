@@ -136,8 +136,8 @@ public function error ($value)
 
 public function insertError ($value)
 {		
-	if (!isset($this->error['other'])) {
-		$this->error['other'] = array ();
+	if (!isset($this->error['app'])) {
+		$this->error['app'] = array ();
 	}
 	
 	if (!isset($this->error['validation'])) {
@@ -151,13 +151,13 @@ public function insertError ($value)
 				[ count($this->error['validation'][$value['field']]) ] = $value;
 				break;
 			default				:
-				$this->error['other'][ count($this->error['other']) ] = $value;
+				$this->error['app'][ count($this->error['app']) ] = $value;
 				break;
 		}
 	} else {
-		$count = count($this->error['other']);
-		$this->error['other'][$count] = $value;
-		$this->error['other'][$count] = $value['type'] = 'notice';
+		$count = count($this->error['app']);
+		$this->error['app'][$count] = $value;
+		//$this->error['app'][$count] = $value['type'] = 'notice';
 	}
 }
 	

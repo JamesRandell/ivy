@@ -14,9 +14,13 @@
 class Ivy_File
 {
 	
-public $error = array ();
+public static $error = Object;
 
-public function __construct ()	{}
+public function __construct ()	
+{
+	self::$error = Ivy_Error::getInstance();
+	
+}
 
 
 public $data = array ();
@@ -26,8 +30,13 @@ public static function load ($path)
 {
 	if (file_exists($path)) {
 		return file_get_contents($path);
+		
 	} else {
-		return;
+		self::$error->insert('File does not exist or cannot be read: ' . $path);
+
+		print_pre(self::$error->select());
+
+		return false;
 	}
 }
 
@@ -272,6 +281,23 @@ public function upload ($array = array ())
 		$this->error[] = 'Upload failed';
 		return false;
 	}
+}
+
+public function readonly ($file) { $this->readable($file); }
+public function readable ($file)
+{
+	echo $file;
+	if (!is_readable(file)) {
+		self::$error->insert('File cannot be read: ' . $path);
+
+
+}
+
+public function writeonly ($file) { $this->writeable($file); }
+public function writeable ($file)
+{
+
+
 }
 
 public function __destruct ()

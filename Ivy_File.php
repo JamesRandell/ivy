@@ -286,10 +286,10 @@ public function upload ($array = array ())
 public function readonly ($file) { $this->readable($file); }
 public function readable ($file)
 {
-	echo $file;
+	
 	if (!is_readable(file)) {
 		self::$error->insert('File cannot be read: ' . $path);
-
+	}
 
 }
 

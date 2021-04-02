@@ -70,10 +70,7 @@ class Ivy_Router {
 		}
 
 		
-		print_pre($file->error);
-		print_pre($t);
-		
-echo IVYPATH . '/config/config.ini';
+
 
 		$parser = parse_ini_file(IVYPATH . '/config/config.ini');
 

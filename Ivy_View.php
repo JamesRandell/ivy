@@ -207,8 +207,8 @@ public function addParameter ($key, $value) {
 			$this->data['resourcepath'] = 'http://' . $_SERVER['SERVER_NAME'] . $tempPath . '/site/' . SITE . '/resource/';
 			$this->data['resourcepath'] = $tempPath . '/site/' . SITE . '/resource/';
 		} else {
-			$this->data['resourcepath'] = 'https://' . $_SERVER['SERVER_NAME'] . '/' . SITE . '/site/' . SITE . '/resource/';
-			$this->data['resourcepath'] = SITE . '/site/' . SITE . '/resource/';
+			$this->data['resourcepath'] = 'https://' . $_SERVER['SERVER_NAME'] . $tempPath . '/site/' . SITE . '/resource/';
+			$this->data['resourcepath'] = $tempPath . '/site/' . SITE . '/resource/';
 		}
 		
 		$this->data['system']['var']['sitepath'] = SITEPATH .'/site/' . SITE;

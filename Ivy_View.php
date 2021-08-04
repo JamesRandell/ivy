@@ -1147,7 +1147,7 @@ public function addData ($data, $name = 'default') {
 		$this->data['system']['stat']['server']['script'] = $regArray['script'];
 		$this->data['system']['stat']['server']['controller'] = $regArray['controller'];
 		$this->data['system']['stat']['server']['action'] = $regArray['action'];
-		
+		$this->data['protocol'] = $this->data['system']['stat']['server']['protocol'] = $_SERVER['request_scheme'];
 		/**
 		 * Jan 2010
 		 * 

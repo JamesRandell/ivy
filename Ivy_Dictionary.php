@@ -71,10 +71,10 @@ class Ivy_Dictionary {
 		// Sept 2021
 		define('EXTENSION', '');
 
-		echo SITEPATH . '/site/' . SITE . '/model/'.$file.'.php';
-		if (file_exists(SITEPATH . '/site/' . SITE . '/model/'.$file.'.php')) {
+		
+		if (file_exists(SITEPATH . '/' . SITE . '/model/'.$file.'.php')) {
 
-			require SITEPATH . '/site/' . SITE . '/model/'.$file.'.php';
+			require SITEPATH . '/' . SITE . '/model/'.$file.'.php';
 
 		} else if (file_exists(SITEPATH . '/extension/' . EXTENSION . '/model/'.$file.'.php')) {
 

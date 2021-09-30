@@ -965,8 +965,8 @@ public function drop () {
 				$field = $joinSpec['fieldParent'];
 				
 				
-				if (file_exists(SITEPATH . '/site/' . SITE . '/model/' . $joinSpec['table'] . '.php')) {
-					require SITEPATH . '/site/' . SITE . '/model/' . $joinSpec['table'] . '.php';
+				if (file_exists(SITEPATH . '/' . SITE . '/model/' . $joinSpec['table'] . '.php')) {
+					require SITEPATH . '/' . SITE . '/model/' . $joinSpec['table'] . '.php';
 				} else if (strpos($joinSpec['table'], 'ivy_') !== false) {
 					require IVYPATH . '/core/model/' . $joinSpec['table'] . '.php';
 				} else if (file_exists('dictionary/table_' . $joinSpec['table'] . '.php')) {

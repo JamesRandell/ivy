@@ -109,8 +109,8 @@ class Ivy_Router {
 			$this->registry->insertSystem('config', $aws) ;
 		}
 		
-		if (is_dir(SITEPATH . '/site/' . SITE)) {
-			require	SITEPATH . '/site/' . SITE . '/system/array.php';
+		if (is_readable(SITEPATH . '/' . SITE . '/system/array.php')) {
+			require	SITEPATH . '/' . SITE . '/system/array.php';
 			$this->registry->insertSystem('keys', $array);
 		}
 
@@ -127,9 +127,9 @@ class Ivy_Router {
 		$sessionRegistry = $this->registry->selectSession(0);
 		
 		
-		if (is_readable(SITEPATH . '//' . SITE . '/controller/' . $this->controller . '.php')) {
+		if (is_readable(SITEPATH . '/' . SITE . '/controller/' . $this->controller . '.php')) {
 			
-			$this->path = SITEPATH . '//' . SITE . '/controller';
+			$this->path = SITEPATH . '/' . SITE . '/controller';
 		
 		} else if (is_readable(SITEPATH . '/controller/' . $this->controller . '.php')) {
 			

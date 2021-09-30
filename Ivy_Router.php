@@ -60,9 +60,8 @@ class Ivy_Router {
 		$this->getController();
 
 
-		print_pre($_ENV);
-
 		$file = new Ivy_File();
+
 		$t = $file->load(IVYPATH . '/config/config.ini');
 		if ($t === FALSE) {
 			$readable = $file->readable(IVYPATH . '/config');
@@ -128,9 +127,9 @@ class Ivy_Router {
 		$sessionRegistry = $this->registry->selectSession(0);
 		
 		
-		if (is_readable(SITEPATH . '/site/' . SITE . '/controller/' . $this->controller . '.php')) {
+		if (is_readable(SITEPATH . '//' . SITE . '/controller/' . $this->controller . '.php')) {
 			
-			$this->path = SITEPATH . '/site/' . SITE . '/controller';
+			$this->path = SITEPATH . '//' . SITE . '/controller';
 		
 		} else if (is_readable(SITEPATH . '/controller/' . $this->controller . '.php')) {
 			
@@ -143,7 +142,7 @@ class Ivy_Router {
 		} else {
 			
 			header("HTTP/1.0 404 Not Found");
-			echo SITEPATH.'//controller/' . $this->controller . '.php' . '<br />';
+			echo SITEPATH.'/controller/' . $this->controller . '.php' . '<br />';
 			die ('404 Not Found');
 			
 		}

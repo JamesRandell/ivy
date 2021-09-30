@@ -968,11 +968,11 @@ public function drop () {
 				if (file_exists(SITEPATH . '/site/' . SITE . '/model/' . $joinSpec['table'] . '.php')) {
 					require SITEPATH . '/site/' . SITE . '/model/' . $joinSpec['table'] . '.php';
 				} else if (strpos($joinSpec['table'], 'ivy_') !== false) {
-					require 'core/model/' . $joinSpec['table'] . '.php';
+					require IVYPATH . '/core/model/' . $joinSpec['table'] . '.php';
 				} else if (file_exists('dictionary/table_' . $joinSpec['table'] . '.php')) {
-					require 'dictionary/table_' . $joinSpec['table'] . '.php';
-				} else if (file_exists('model/' . $joinSpec['table'] . '.php')) {
-					require 'model/' . $joinSpec['table'] . '.php';
+					require IVYPATH . '/dictionary/table_' . $joinSpec['table'] . '.php';
+				} else if (file_exists(IVYPATH . '/model/' . $joinSpec['table'] . '.php')) {
+					require IVYPATH . '/model/' . $joinSpec['table'] . '.php';
 				} else if ($this->extension) {
 					$explode = explode('_', $joinSpec['table']);
 					require 'extension/' . $this->extension . '/model/' . $explode[2] . '.php';

@@ -67,6 +67,11 @@ class Ivy_Dictionary {
 
 		$this->keys = $registry->selectSystem('keys');
 
+		// put this here for temp as i have no idea how this works and will probably re-work it
+		// Sept 2021
+		define('EXTENSION', '');
+
+		echo SITEPATH . '/site/' . SITE . '/model/'.$file.'.php';
 		if (file_exists(SITEPATH . '/site/' . SITE . '/model/'.$file.'.php')) {
 
 			require SITEPATH . '/site/' . SITE . '/model/'.$file.'.php';

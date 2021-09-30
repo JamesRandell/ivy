@@ -11,10 +11,11 @@
  * Creates, updates and retrieves data to/from an XML file.
  * @package File
  */
+
 class Ivy_File
 {
 	
-public static $error = Object;
+public static $error;
 
 public function __construct ()	
 {

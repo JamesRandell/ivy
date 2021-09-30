@@ -85,7 +85,7 @@ function myAutoloader($className) {
 	
     $directories = array (
 		IVYPATH . '/',
-		'site/' . SITE . '/controller/',
+		SITEPATH . '/' . SITE . '/controller/',
 		SITEPATH . '/controller/',
 		IVYPATH . '/templating/'
 	);
@@ -129,10 +129,10 @@ function checkFile ($file) {
 	
 	$array['ext'] = end($fileArray);
 
-	if (is_readable(SITEPATH . '/site/' . SITE . '/resource/css/' . $file)) {
-		$array['path'] = SITEPATH . '/site/' . SITE . '/resource/css/' . $file;
-	} else if (is_readable(SITEPATH . '/site/' . SITE . '/resource/script/' . $file)) {
-		$array['path'] = SITEPATH . '/site/' . SITE . '/resource/script/' . $file;
+	if (is_readable(SITEPATH . '/' . SITE . '/resource/css/' . $file)) {
+		$array['path'] = SITEPATH . '/' . SITE . '/resource/css/' . $file;
+	} else if (is_readable(SITEPATH . '/' . SITE . '/resource/script/' . $file)) {
+		$array['path'] = SITEPATH . '/' . SITE . '/resource/script/' . $file;
 	} else if (is_readable('shared/' . THEME . '/css/' . $file)) {
 		$array['path'] = 'shared/' . THEME . '/css/' . $file;
 	} else if (is_readable('shared/' . THEME . '/script/' . $file)) {

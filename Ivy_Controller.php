@@ -434,7 +434,7 @@ static function load () {
 private function _permissionLoop ($array) {
 
 	foreach ($array as $key => $data) {
-	
+
 		(bool) $exitLoop = false;
 
 		// by default, always run the loop for children
@@ -454,7 +454,8 @@ private function _permissionLoop ($array) {
 		}*/
 
 		if ($this->session->authenticate() === 0) {
-			if (!in_array('public', $data['_acg'])) {
+
+			if (isset($data['_acg']) && !in_array('public', $data['_acg'])) {
 				unset($array[$key]);
 				$exitLoop = true;
 			} else {
@@ -557,7 +558,7 @@ private function _permissionLoop ($array) {
 
 
 /**
- * Cleans up the navigation array depending on how cascading it it
+ * Cleans up the navigation array depending on how cascading it is
  * 
  * Sets things like active and remove links that the user doesn't have access too.
  * Does this based on if the navigation is SITE wide or just CONTROLLER wide

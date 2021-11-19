@@ -108,8 +108,9 @@ class Ivy_Router {
 			/* OK push this into the registry */
 			$this->registry->insertSystem('config', $aws) ;
 		}
-		
+
 		if (is_readable(SITEPATH . '/' . SITE . '/system/array.php')) {
+
 			require	SITEPATH . '/' . SITE . '/system/array.php';
 			$this->registry->insertSystem('keys', $array);
 		}
@@ -125,14 +126,19 @@ class Ivy_Router {
 
 		
 		$sessionRegistry = $this->registry->selectSession(0);
+	
 		
-		
+		(string) $debugStr = 'Failed to find files:<br>';
+		$debugStr .= ' - ' . SITEPATH . '/' . SITE . '/controller/' . $this->controller . '.php<br>';
+		$debugStr .= ' - ' . SITEPATH . '/controller/' . $this->controller . '.php<br>';
+		$debugStr .= ' - ' . SITEPATH . '/core/extension/' . $this->controller . '/controller/' . $this->controller . '.php<br>';
+
 		if (is_readable(SITEPATH . '/' . SITE . '/controller/' . $this->controller . '.php')) {
 			
 			$this->path = SITEPATH . '/' . SITE . '/controller';
 		
 		} else if (is_readable(SITEPATH . '/controller/' . $this->controller . '.php')) {
-			
+
 			$this->path = SITEPATH . '/controller';
 		
 		} else if (is_readable(SITEPATH . '/core/extension/' . $this->controller . '/controller/' . $this->controller . '.php')) {
@@ -142,7 +148,7 @@ class Ivy_Router {
 		} else {
 			
 			header("HTTP/1.0 404 Not Found");
-			echo SITEPATH.'/controller/' . $this->controller . '.php' . '<br />';
+			echo $debugStr;
 			die ('404 Not Found');
 			
 		}
@@ -163,6 +169,7 @@ class Ivy_Router {
 		(string) $action = '';
 		(array) $array = array ();
 		
+		
 		require $this->path . '/' . $this->controller . '.php';
 		
 		/*** a new controller class instance ***/
@@ -173,8 +180,6 @@ class Ivy_Router {
 		if (is_callable(array($controller, $this->action)) === false) {
 			trigger_error('The action: "' . $this->action . '" was not found');
 			$this->action = $action = 'index';
-			
-			
 		} else {
 			$action = $this->action;
 			$actionExists = true;
@@ -225,26 +230,67 @@ class Ivy_Router {
 	 *
 	 */
 	private function getController () {
-		$controller = (string) '';
-		$action = (string) '';
-		$getArray = array ();
-		$otherArray = array ();
+		(string) $controller = '';
+		(string) $action = '';
+		(array) $getArray = array ();
+		(array) $otherArray = array ();
+
+		// will contain either REQUEST_URI ot QUERY_STRING
+		(string) $uriString = "";
 		
 		$this->action = 'index';
+		
+		/**
+		 * Because i've been fiddling about with NGINX configurations and rewrite rules, I've added
+		 * in some logic to extract URL parts romthe REQUEST_URI if the QUERY_STRING is empty.
+		 * This can be empty if I don't pass additional parameters to the php file from the nginx
+		 * rewrite rule
+		 */
+		
+
+		if (isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] == "") {
+			// QUERY_STRING is empty, so lets check REQUEST_URI which won't be
+			$uriString = $_SERVER['REQUEST_URI'];
+
+			/**
+			 * we're now going to explode the string, and remove any elements before and including a value
+			 * that matches our site name
+			 * 
+			 * (Nov 2021) We only do this for the REQUEST_URI as it may include URI parts BEFORE the 
+			 * controller. For instance, it could include the SITE name we're accessing, in which case we 
+			 * want to remove this and everything before it as we have that already defined in 'SITE'
+			 */
+			(array) $t_uriArray = explode($uriString, '/');
+			(int) $t_removePoint = 0;
+			foreach ($uriArray as $key => $value) {
+				if (SITE === $value) {
+					// record where the SITE name was found, so we can remove everything before it in our array
+					$t_removePoint = $key;
+				}
+			}
+
+			$t_uriArray = array_slice($t_uriArray, $t_removePoint-1, NULL, TRUE);
+			$uriString = implode('/', $t_uriArray);
+
+		} else {
+			$uriString = $_SERVER['QUERY_STRING'];
+		}
+
 		
 		/**
 		 * new part as of April 20th 2010
 		 * 
 		 * checks the PATH_INFO section of the SERVER global to fingure out the controller
-		 * and action, instead og $_GET variables
+		 * and action, instead of $_GET variables
 		 *
 		 * July 2011 - edited to allow better URI mapping
 		 */
-		if (isset($_SERVER['QUERY_STRING'])) {
-			$queryParts = explode('/', $_SERVER['QUERY_STRING']);
+
+		if ($uriString != "") {
+			$queryParts = explode('/', $uriString);
 
 			/**
-			 * check for a start slash and remove the empty value is there is one
+			 * check for a start slash and remove the empty value if there is one
 			 */
 			if (!$queryParts[0]) {
 				array_shift($queryParts);

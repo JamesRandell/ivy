@@ -1162,11 +1162,8 @@ public function addData ($data, $name = 'default') {
 
 		if ($template !== FALSE) {
 
-			if (is_readable(SITEPATH . '/extension/' . EXTENSION . '/view/local/' . $template . '.htm')) {
-
-				$settingsArray['localPath'] = SITEPATH . '/extension/' . EXTENSION . '/view/local/';
+			if (is_readable(SITEPATH . '/site/' . SITE . '/resource/view/local/' . $template . '.htm')) {								
 			
-			} else if (is_readable(SITEPATH . '/site/' . SITE . '/resource/view/local/' . $template . '.htm')) {								
 				$settingsArray['localPath'] = SITEPATH . '/site/' . SITE . '/resource/view/local/';
 			
 			} else if (is_readable(SITEPATH . '/site/' . SITE . '/view/local/' . $template . '.htm')) {				
@@ -1193,11 +1190,7 @@ public function addData ($data, $name = 'default') {
 			
 			}
 
-			if (defined('EXTENSION') && is_readable(SITEPATH . '/extension/' . EXTENSION . '/view/global/' . $globalTemplate . '.htm')) {
-		
-				$settingsArray['globalPath'] = SITEPATH . '/extension/' . EXTENSION . '/view/global/';
-			
-			} else if (is_readable(IVYPATH . '/extension/' . $this->extension . '/view/global/' . $globalTemplate . '.htm')) {
+			if (is_readable(IVYPATH . '/extension/' . $this->extension . '/view/global/' . $globalTemplate . '.htm')) {
 		
 				$settingsArray['globalPath'] = IVYPATH . '/extension/' . $this->extension . '/view/global/';
 			

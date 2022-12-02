@@ -202,6 +202,7 @@ class Ivy_Router {
 			die ('404 '. $this->action . ' not Found');			
 		}
 
+
 		if ($controller->authorised === 0 && $action != 'logout') {
 			//$this->session->authenticate(0);
 

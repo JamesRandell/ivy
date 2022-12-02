@@ -448,6 +448,9 @@ private function _permissionLoop ($array) {
 			$array[$key]['_dcg'] = $data[$key] = array();
 		}
 		
+		if (!$this->session->acg) {
+			return;// array();
+		}
 		/*if (in_array($this->session->autenticationAccess, $data['_acg']) === 1 && $this->session->authenticate() === 0) {
 			unset($array[$key]);
 			$exitLoop = true;

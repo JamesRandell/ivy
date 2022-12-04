@@ -147,10 +147,12 @@ function __construct ($registry = NULL) {
 	
 	if (!defined('CONTROLLER')) {
 		define('CONTROLLER', $this->controller());
+		//$this->controller = $this->controller();
 	}
 	
 	if (!defined('ACTION')) {
 		define('ACTION', $this->action());
+		//$this->action = $this->action();
 	}
 
 	/**
